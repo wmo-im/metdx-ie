@@ -1,0 +1,5 @@
+.asciidoctor/
+metdx-ie/*.docx
+metdx-ie/*.html
+metdx-ie/*.pdf
+metdx-ie/images/**.bkp

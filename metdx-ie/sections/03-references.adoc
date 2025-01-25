@@ -1,0 +1,5 @@
+== References
+
+* [[wis2-manual]] Manual on the WMO Information System, Volume II - WMO Information System 2.0 footnote:[https://library.wmo.int/idurl/4/68731]
+* [[wis2-guide]] Guide to the WMO Information System Volume II - WMO Information System 2.0 footnote:[https://library.wmo.int/idurl/4/69130]
+* [[wis2-transition-guide]] Provisions for the Transition from the WMO Information System (WIS) 1.0 and Global Telecommunication System to WIS 2.0 footnote:[https://library.wmo.int/idurl/4/69050]

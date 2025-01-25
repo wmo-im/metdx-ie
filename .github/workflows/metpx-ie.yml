@@ -1,0 +1,45 @@
+name: WMO Met Data Exchange Interoperability Experiment
+
+on:
+  push:
+    branches:
+    - main
+
+env:
+  FILE_BASENAME: metdx-ie-DRAFT
+
+jobs:
+  build-metdx-ie:
+    name: Generate documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y \
+          && sudo apt-get install -y pandoc \
+          && sudo gem install asciidoctor asciidoctor-pdf
+      - name: checkout repository
+        uses: actions/checkout@master
+      - name: build documentation
+        run: |
+          mkdir -p /tmp/metdx-ie/metdx-ie/images \
+          && cd metdx-ie \
+          && asciidoctor --trace -o /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.html index.adoc \
+          && asciidoctor -a allow-uri-read --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.docx \
+          && asciidoctor -a allow-uri-read --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.pdf index.adoc \
+          && cp images/*.png /tmp/metdx-ie/metdx-ie/images \
+          && cd ..
+      - name: checkout gh-pages branch
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+      - name: update gh-pages branch and publish
+        run: | 
+          git checkout gh-pages
+          git config --global user.email "tomkralidis@gmail.com"
+          git config --global user.name "Tom Kralidis"
+          rm -rf metdx-ie
+          mv -f /tmp/metdx-ie/* .
+          git add .
+          git commit -am "update WMO Met Data Exchange Interoperability Experiment"
+          git push

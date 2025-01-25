@@ -1,0 +1,6 @@
+==== STAC API
+
+The SpatioTemporal Asset Catalog (STAC) footnote:[https://stacspec.org] specification provides a common structure for describing and cataloging spatiotemporal assets.
+
+The STAC API footnote:[https://github.com/radiantearth/stac-api-spec] provides a RESTful endpoint that enables search of STAC Items, specified in OpenAPI, following OGC API - Features and OGC API - Records.
+

@@ -1,0 +1,7 @@
+[appendix,obligation=informative]
+[[annex-bibliography]]
+[bibliography]
+== Bibliography
+
+* [[ogcapi]] OGC API (2025) footnote:[https://ogcapi.ogc.org]
+* [[ogcapi-workshop]] OGC API workshop (2025) footnote:[https://ogcapi-workshop.ogc.org]

@@ -1,0 +1,4 @@
+==== CoverageJSON
+
+CoverageJSON footnote:[https://www.ogc.org/publications/standard/coveragejson] defines a format for publishing spatiotemporal data to the Web. CoverageJSON supports the efficient transfer from big data stores of useful quantities of data to lightweight clients, such as browsers and mobile applications.
+

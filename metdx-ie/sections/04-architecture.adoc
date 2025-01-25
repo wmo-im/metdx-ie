@@ -1,0 +1,31 @@
+[[testing]]
+== High Level Architecture
+
+The focus of testing is to evaluate functionality of various APIs and encodings to assess and evaluate for future data exchange guidance and technical regulation.
+
+Core threads of work include:
+
+- discrete sampling of NWP data and observations
+- AI-driven search
+- visualization of weather/climate/water products
+- exploitation of data via custom processing workflows
+- encodings for big multimensional data
+- interfaces and encodings for cloud optimized data discovery and access
+
+[[img_architecture]]
+.High Level Overview of the Architecture
+image::images/architecture.png[align="center",width=1200]
+
+=== Web APIs
+
+include::architecture/ogcapi-environmental-data-retrieval.adoc[]
+include::architecture/ogcapi-maps.adoc[]
+include::architecture/ogcapi-records.adoc[]
+include::architecture/ogcapi-processes.adoc[]
+include::architecture/stac-api.adoc[]
+
+=== Encodings
+
+include::architecture/covjson.adoc[]
+include::architecture/zarr.adoc[]
+include::architecture/stac-encodings.adoc[]

@@ -1,0 +1,4 @@
+==== OGC API - Maps
+
+The OGC API - Maps footnote:[https://ogcapi.ogc.org/maps] Standard describes an API that can serve spatially referenced electronic maps, whether static or dynamically rendered, in a manner independent of the underlying data store. OGC API - Maps describes the discovery and query operations of an API that provides access to electronic maps in a manner independent of the underlying data store. The query operations allow dynamically rendered maps to be retrieved from the underlying data store based upon simple selection criteria, defined by the client.
+
