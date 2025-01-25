@@ -1,9 +1,8 @@
-# WIS2 Global Services testing
+# WMO Met Data Exchange Interoperability Experiment
 
 ## Overview
 
-This directory manages the WIS2 Global Services testing documentation.  This document provides
-technical guidance on the implementation of WIS2
+This directory manages the WMO Met Data Exchange Interoperability Experiment documentation.
 
 ### Dependencies
 
@@ -22,11 +21,11 @@ npm install asciidoctor asciidoctor-pdf asciidoc-link-check
 
 ```bash
 # create HTML (single page)
-asciidoctor --trace -o wis2-global-services-testing.html index.adoc
+asciidoctor --trace -o metdx-ie.html index.adoc
 # create PDF
-asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o wis2-global-services-testing.pdf index.adoc
+asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o metdx-ie.pdf index.adoc
 # create Word document
-asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output wis2-global-services-testing.docx
+asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output metdx-ie.docx
 ```
 
 # check links
