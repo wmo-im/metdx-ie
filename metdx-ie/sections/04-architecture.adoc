@@ -11,6 +11,7 @@ Core threads of work include:
 - exploitation of data via custom processing workflows
 - encodings for big multimensional data
 - interfaces and encodings for cloud optimized data discovery and access
+- data usage insights, weblogs for Global Caches and Global Discovery Catalogues
 
 [[img_architecture]]
 .High Level Overview of the Architecture
