@@ -4,6 +4,6 @@
 The subject of this Report is the results of testing and experimentation of current data exchange interoperability trends.  Interoperability testing is coordinated by the WMO Study Group on Future Data Infrastructures (SG-FIT) subgroup on WMO Met Data Exchange Interoperability.  The results of this report will support recommendations on future state data exchange standards guidance and techical regulations at WMO.
 
 [.preface]
-== Executive Summary
+== Executive summary
 
 TODO

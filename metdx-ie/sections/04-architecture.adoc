@@ -1,5 +1,5 @@
 [[testing]]
-== High Level Architecture
+== High level architecture
 
 The focus of testing is to evaluate functionality of various APIs and encodings to assess and evaluate for future data exchange guidance and technical regulation.
 
