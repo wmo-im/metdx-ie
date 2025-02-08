@@ -5,13 +5,13 @@ The focus of testing is to evaluate functionality of various APIs and encodings 
 
 Core threads of work include:
 
-- discrete sampling of NWP data and observations
-- AI-driven search
-- visualization of weather/climate/water products
-- exploitation of data via custom processing workflows
-- encodings for big multimensional data
-- interfaces and encodings for cloud optimized data discovery and access
-- data usage insights, weblogs for Global Caches and Global Discovery Catalogues
+. discrete sampling of NWP data and observations
+. interfaces and encodings for cloud optimized data discovery and access
+. encodings for big multimensional data
+. visualization of weather/climate/water products
+. AI-driven search
+. exploitation of data via custom processing workflows
+. data usage insights, weblogs for Global Caches and Global Discovery Catalogues
 
 [[img_architecture]]
 .High Level Overview of the Architecture
