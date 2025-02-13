@@ -7,7 +7,7 @@ Core threads of work include:
 
 . discrete sampling of NWP data and observations
 . interfaces and encodings for cloud optimized data discovery and access
-. encodings for big multimensional data
+. encodings for big multidimensional data
 . visualization of weather/climate/water products
 . AI-driven search
 . exploitation of data via custom processing workflows
