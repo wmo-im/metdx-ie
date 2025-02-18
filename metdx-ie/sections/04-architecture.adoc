@@ -3,21 +3,48 @@
 
 The focus of testing is to evaluate functionality of various APIs and encodings to assess and evaluate for future data exchange guidance and technical regulation.
 
+=== Core work threads
+
 Core threads of work include:
 
-. discrete sampling of NWP data and observations
-. interfaces and encodings for cloud optimized data discovery and access
-. encodings for big multidimensional data
-. visualization of weather/climate/water products
-. AI-driven search
-. exploitation of data via custom processing workflows
-. data usage insights, weblogs for Global Caches and Global Discovery Catalogues
+==== Discrete sampling of NWP data and observations
+
+TODO
+
+==== Interfaces and encodings for cloud optimized data discovery and access
+
+TODO
+
+==== Encodings for big multidimensional data
+
+TODO
+
+==== Visualization of weather/climate/water products
+
+TODO
+
+==== AI-driven search
+
+TODO
+
+==== Exploitation of data via custom processing workflows
+
+TODO
+
+==== Data usage insights, weblogs for Global Caches and Global Discovery Catalogues
+
+TODO
+
+=== Standards
+
+The rest of this section describes the standards implemented during or in support of the interoperability experiment.
 
 [[img_architecture]]
-.High Level Overview of the Architecture
+.High Level Overview of Standards used
 image::images/architecture.png[align="center",width=1200]
 
-=== Web APIs
+
+==== Web APIs
 
 include::architecture/ogcapi-environmental-data-retrieval.adoc[]
 include::architecture/ogcapi-maps.adoc[]
@@ -25,7 +52,7 @@ include::architecture/ogcapi-records.adoc[]
 include::architecture/ogcapi-processes.adoc[]
 include::architecture/stac-api.adoc[]
 
-=== Encodings
+==== Encodings
 
 include::architecture/covjson.adoc[]
 include::architecture/zarr.adoc[]
