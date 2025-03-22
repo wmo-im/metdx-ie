@@ -2,4 +2,28 @@
 
 == Results
 
+=== Core work threads
+
+==== Data access optimization for everyday users
+
+TODO
+
+==== Data access optimization for power users
+
+TODO
+
+==== Toolkits for local NMHS operations
+
+TODO
+
+==== Custom data processing
+
+TODO
+
+==== AI-driven search
+
+TODO
+
+==== Data usage insights, weblogs for Global Caches and Global Discovery Catalogues
+
 TODO

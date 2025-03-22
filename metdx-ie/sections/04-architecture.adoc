@@ -7,33 +7,34 @@ The focus of testing is to evaluate functionality of various APIs and encodings 
 
 Core threads of work include:
 
-==== Discrete sampling of NWP data and observations
+==== Data access optimization for everyday users
 
-TODO
+This work thread will focus on data access patterns and encodings for meteorologists and Web developers
+for discrete sampling of NWP data and observations.
 
-==== Interfaces and encodings for cloud optimized data discovery and access
+==== Data access optimization for power users
 
-TODO
+This work thread will focus on data access patterns and encodings for researchers, data scientists and
+other data experts working with a data integration viewpoint.
 
-==== Encodings for big multidimensional data
+==== Toolkits for local NMHS operations
 
-TODO
+This work thread will focus on the development of a visualization toolbox for weather/climate/water
+products in support of local NMHS operations.
 
-==== Visualization of weather/climate/water products
+==== Custom data processing
 
-TODO
+This work thread will focus on processing definitions for weather/climate/water related workflows, to facilitate
+common tasks provided for WMO Members and data proximate computation.
 
 ==== AI-driven search
 
-TODO
-
-==== Exploitation of data via custom processing workflows
-
-TODO
+This work thread will focus on investigating value added capabilities on data and metadata made available by WIS2.
 
 ==== Data usage insights, weblogs for Global Caches and Global Discovery Catalogues
 
-TODO
+This work thread will focus on using metrics provided by WIS2 Global Cache and Global Discovery Catalogue services
+to identify and analyze trends that can affect infrastructure planning and continuous improvement.
 
 === Standards
 
