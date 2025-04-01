@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-03-11</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-04-01</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.1</p></td>
@@ -494,13 +494,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_core_work_threads">6.1. Core work threads</a>
 <ul class="sectlevel3">
-<li><a href="#_discrete_sampling_of_nwp_data_and_observations">6.1.1. Discrete sampling of NWP data and observations</a></li>
-<li><a href="#_interfaces_and_encodings_for_cloud_optimized_data_discovery_and_access">6.1.2. Interfaces and encodings for cloud optimized data discovery and access</a></li>
-<li><a href="#_encodings_for_big_multidimensional_data">6.1.3. Encodings for big multidimensional data</a></li>
-<li><a href="#_visualization_of_weatherclimatewater_products">6.1.4. Visualization of weather/climate/water products</a></li>
+<li><a href="#_data_access_optimization_for_everyday_users">6.1.1. Data access optimization for everyday users</a></li>
+<li><a href="#_data_access_optimization_for_power_users">6.1.2. Data access optimization for power users</a></li>
+<li><a href="#_toolkits_for_local_nmhs_operations">6.1.3. Toolkits for local NMHS operations</a></li>
+<li><a href="#_custom_data_processing">6.1.4. Custom data processing</a></li>
 <li><a href="#_ai_driven_search">6.1.5. AI-driven search</a></li>
-<li><a href="#_exploitation_of_data_via_custom_processing_workflows">6.1.6. Exploitation of data via custom processing workflows</a></li>
-<li><a href="#_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues">6.1.7. Data usage insights, weblogs for Global Caches and Global Discovery Catalogues</a></li>
+<li><a href="#_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues">6.1.6. Data usage insights, weblogs for Global Caches and Global Discovery Catalogues</a></li>
 </ul>
 </li>
 <li><a href="#_standards">6.2. Standards</a>
@@ -519,7 +518,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#results">7. Results</a></li>
+<li><a href="#results">7. Results</a>
+<ul class="sectlevel2">
+<li><a href="#_core_work_threads_2">7.1. Core work threads</a>
+<ul class="sectlevel3">
+<li><a href="#_data_access_optimization_for_everyday_users_2">7.1.1. Data access optimization for everyday users</a></li>
+<li><a href="#_data_access_optimization_for_power_users_2">7.1.2. Data access optimization for power users</a></li>
+<li><a href="#_toolkits_for_local_nmhs_operations_2">7.1.3. Toolkits for local NMHS operations</a></li>
+<li><a href="#_custom_data_processing_2">7.1.4. Custom data processing</a></li>
+<li><a href="#_ai_driven_search_2">7.1.5. AI-driven search</a></li>
+<li><a href="#_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues_2">7.1.6. Data usage insights, weblogs for Global Caches and Global Discovery Catalogues</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#discussion">8. Discussion</a></li>
 <li><a href="#conclusions">9. Conclusions</a></li>
 <li><a href="#_future_work">10. Future work</a></li>
@@ -599,6 +611,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <dd>
 <p>Message Queuing Telemetry Transport</p>
 </dd>
+<dt class="hdlist1">NMHS</dt>
+<dd>
+<p>National Meteorological and Hydrological Service</p>
+</dd>
 <dt class="hdlist1">RODEO</dt>
 <dd>
 <p>The provision of open access to public meteorological data and development of shared federated data infrastructure for the development of information products and services</p>
@@ -650,45 +666,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Core threads of work include:</p>
 </div>
 <div class="sect3">
-<h4 id="_discrete_sampling_of_nwp_data_and_observations"><a class="anchor" href="#_discrete_sampling_of_nwp_data_and_observations"></a>6.1.1. Discrete sampling of NWP data and observations</h4>
+<h4 id="_data_access_optimization_for_everyday_users"><a class="anchor" href="#_data_access_optimization_for_everyday_users"></a>6.1.1. Data access optimization for everyday users</h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This work thread will focus on data access patterns and encodings for meteorologists and Web developers
+for discrete sampling of NWP data and observations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces_and_encodings_for_cloud_optimized_data_discovery_and_access"><a class="anchor" href="#_interfaces_and_encodings_for_cloud_optimized_data_discovery_and_access"></a>6.1.2. Interfaces and encodings for cloud optimized data discovery and access</h4>
+<h4 id="_data_access_optimization_for_power_users"><a class="anchor" href="#_data_access_optimization_for_power_users"></a>6.1.2. Data access optimization for power users</h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This work thread will focus on data access patterns and encodings for researchers, data scientists and
+other data experts working with a data integration viewpoint.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_encodings_for_big_multidimensional_data"><a class="anchor" href="#_encodings_for_big_multidimensional_data"></a>6.1.3. Encodings for big multidimensional data</h4>
+<h4 id="_toolkits_for_local_nmhs_operations"><a class="anchor" href="#_toolkits_for_local_nmhs_operations"></a>6.1.3. Toolkits for local NMHS operations</h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This work thread will focus on the development of a visualization toolbox for weather/climate/water
+products in support of local NMHS operations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_visualization_of_weatherclimatewater_products"><a class="anchor" href="#_visualization_of_weatherclimatewater_products"></a>6.1.4. Visualization of weather/climate/water products</h4>
+<h4 id="_custom_data_processing"><a class="anchor" href="#_custom_data_processing"></a>6.1.4. Custom data processing</h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This work thread will focus on processing definitions for weather/climate/water related workflows, to facilitate
+common tasks provided for WMO Members and data proximate computation.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_ai_driven_search"><a class="anchor" href="#_ai_driven_search"></a>6.1.5. AI-driven search</h4>
 <div class="paragraph">
-<p>TODO</p>
+<p>This work thread will focus on investigating value added capabilities on data and metadata made available by WIS2.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_exploitation_of_data_via_custom_processing_workflows"><a class="anchor" href="#_exploitation_of_data_via_custom_processing_workflows"></a>6.1.6. Exploitation of data via custom processing workflows</h4>
+<h4 id="_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues"><a class="anchor" href="#_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues"></a>6.1.6. Data usage insights, weblogs for Global Caches and Global Discovery Catalogues</h4>
 <div class="paragraph">
-<p>TODO</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues"><a class="anchor" href="#_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues"></a>6.1.7. Data usage insights, weblogs for Global Caches and Global Discovery Catalogues</h4>
-<div class="paragraph">
-<p>TODO</p>
+<p>This work thread will focus on using metrics provided by WIS2 Global Cache and Global Discovery Catalogue services
+to identify and analyze trends that can affect infrastructure planning and continuous improvement.</p>
 </div>
 </div>
 </div>
@@ -796,8 +811,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="results"><a class="anchor" href="#results"></a>7. Results</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_core_work_threads_2"><a class="anchor" href="#_core_work_threads_2"></a>7.1. Core work threads</h3>
+<div class="sect3">
+<h4 id="_data_access_optimization_for_everyday_users_2"><a class="anchor" href="#_data_access_optimization_for_everyday_users_2"></a>7.1.1. Data access optimization for everyday users</h4>
 <div class="paragraph">
 <p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data_access_optimization_for_power_users_2"><a class="anchor" href="#_data_access_optimization_for_power_users_2"></a>7.1.2. Data access optimization for power users</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_toolkits_for_local_nmhs_operations_2"><a class="anchor" href="#_toolkits_for_local_nmhs_operations_2"></a>7.1.3. Toolkits for local NMHS operations</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_custom_data_processing_2"><a class="anchor" href="#_custom_data_processing_2"></a>7.1.4. Custom data processing</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ai_driven_search_2"><a class="anchor" href="#_ai_driven_search_2"></a>7.1.5. AI-driven search</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues_2"><a class="anchor" href="#_data_usage_insights_weblogs_for_global_caches_and_global_discovery_catalogues_2"></a>7.1.6. Data usage insights, weblogs for Global Caches and Global Discovery Catalogues</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -938,7 +989,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-11 10:25:32 UTC
+Last updated 2025-04-01 10:23:50 UTC
 </div>
 </div>
 </body>
