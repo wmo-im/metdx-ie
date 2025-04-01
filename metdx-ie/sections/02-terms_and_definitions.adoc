@@ -14,6 +14,7 @@ HTTPS:: Hypertext Transfer Protocol Secure
 JSON:: JavaScript Object Notation
 OGC:: Open Geospatial Consortium
 MQTT:: Message Queuing Telemetry Transport
+NMHS:: National Meteorological and Hydrological Service
 RODEO:: The provision of open access to public meteorological data and development of shared federated data infrastructure for the development of information products and services
 STAC:: SpatioTemporal Asset Catalog
 WIS:: WMO Information System
