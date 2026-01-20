@@ -24,13 +24,13 @@ jobs:
         run: |
           mkdir -p /tmp/metdx-ie/metdx-ie/images \
           && cd metdx-ie \
-          && asciidoctor --trace -o /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.html index.adoc \
+          && asciidoctor --trace -a stylesheet=css/wmo-asciidoc.css -o /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.html index.adoc \
           && asciidoctor -a allow-uri-read --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.docx \
           && asciidoctor -a allow-uri-read --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/metdx-ie/metdx-ie/${FILE_BASENAME}.pdf index.adoc \
           && cp images/*.png /tmp/metdx-ie/metdx-ie/images \
           && cd ..
       - name: checkout gh-pages branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
         with:
           ref: gh-pages
       - name: update gh-pages branch and publish
