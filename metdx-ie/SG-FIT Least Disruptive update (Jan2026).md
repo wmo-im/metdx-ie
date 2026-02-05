@@ -456,22 +456,22 @@ array([277.17514648, 276.23178711, 277.2572998 , 277.56884766,
     - \[interactive\] data-driven “add-to” application workflows for adding data and maps to the application   
   
 # Next (short-term):  
-- Document “opinionated” hypercube pattern for weather prediction model output  
-- “Dockerise” GRIB indexer  
-- (AW) Automate addition of model run instances to ECMWF (_earthkit?_) plugin in for pygeoapi so that new data arriving is visible in the Collection, Instance, and Schema end-points (overriding default configuration)  
-- (AW) OGC-API Maps temporal extent for ECMWF (_earthkit?_) plugin in for pygeoapi   
+- Document “opinionated” hypercube pattern for weather prediction model output; (5-Feb) work in progress  
+- “Dockerise” GRIB indexer; (5-Feb) modify to write to object store not filesystem; pass in attributes of object store  
+- (AW) Automate addition of model run instances to ECMWF (_earthkit?_) plugin in for pygeoapi so that new data arriving is visible in the Collection, Instance, and Schema end-points (overriding default configuration); done  
+- (AW) OGC-API Maps temporal extent for ECMWF (_earthkit?_) plugin in for pygeoapi; done https://polytope-edr.lumi.apps.dte.destination-earth.eu/collections/operational_map_server/schema (needs verification to check if the schemas are in the correct format)   
   
 # Next (medium term):  
 - Continue to develop the Web-based UI  
     - “Add to” application workflows for maps (imagery), coverages (q=polygon, q=radius, q=location), and time-series (q=radius, q=location)  
     - Diff two data-sources?  
-- Implement pygeoapi plugin for ECMWF’s Polytope-over-xarray providing all types of EDR data queries (“if you can open a resource in xarray, you can run polytope with it”)  
-- (MB) Configure GRIB indexer to use GFS data on ASDI (retention period is 2+ years so the indexes will still be valid in Nov-2026 for INFCOM-4)  
-- (MB) Convert the GRIB indexer to a ogcapi-processes (part 1) deployment with asynchronous execution  
-- Update GRIB indexer to use VirtualiZarr/Zarr.v3   
-- Develop proposal on describing model-run output with STAC   
+- Implement pygeoapi plugin for ECMWF’s Polytope-over-xarray providing all types of EDR data queries (“if you can open a resource in xarray, you can run polytope with it”); (5-Feb) pending, start in a couple of weeks?  
+- (MB) Configure GRIB indexer to use GFS data on ASDI (retention period is 2+ years so the indexes will still be valid in Nov-2026 for INFCOM-4); (5-Feb) will create a set of indexes for GFS data  
+- (MB) Convert the GRIB indexer to a ogcapi-processes (part 1) deployment with asynchronous execution; (5-Feb) pending  
+- Update GRIB indexer to use VirtualiZarr/Zarr.v3; (5-Feb) depends on future support in VirtualiZarr for GRIB   
+- Develop proposal on describing model-run output with STAC; (5 Feb) this is linked to the hypercube description   
 - Enumerate data visualisation use cases in [opengeospatial/metocean-ogcapi-maps-profile ](https://github.com/opengeospatial/metocean-ogcapi-maps-profile)(as per Issue #1)  
-- (MB) Implementation: \[lambda: custom ogcapi-edr implementation\] + \[xarray\] + \[indexes\] + \[remote open data\]  
+- (MB) Implementation: \[lambda: custom ogcapi-edr implementation\] + \[xarray\] + \[indexes\] + \[remote open data\] ; (5-Feb) need to talk about where to host this and who pays :)  
 - (MB) Implementation: \[lambda: custom ogcapi-maps implementation + matplotlib\] + \[xarray\] + \[indexes\] + \[remote open data\]  
     - AWS lambda implementations (which incur running costs) could be deployed by 3rd parties, thus enabling sharing of the costs associated with data sharing  
 - (JT/Mikko Rauhala (FMI)) Implementation: \[FMI SmartMet Server\]  
