@@ -481,11 +481,11 @@ array([277.17514648, 276.23178711, 277.2572998 , 277.56884766,
   
 # For INFCOM-4:  
 - Recommendations:  
-  - Develop [community standard?] for hypercube description  
+  - Develop [community standard?] for hypercube description; (5-Feb) _hypercube_ is an overloaded term; is there a better term to use? 
         - Begin with weather prediction model output  
         - Define roadmap for other applications (climate models, radar, satellite)  
         - Engage/harmonize with OGC GeoZarr Standards Working Group  
-  - Develop standardised framework in TechRegs for use of Web-based data APIs in WIS2: increasing “prescriptiveness” to drive machine-level interoperability at domain level  
+  - Develop standardised framework in TechRegs for use of Web-based data APIs in WIS2: increasing “prescriptiveness” to drive machine-level interoperability at domain level; (5-Feb) with every level of "increasing commitment", explain to people the additional benefit  
         1. APIs must be self-describing 
         2. Use OpenAI to describe your API  
         3. Use an open-standard API definition if a suitable one exists for your application (see no. 4)  
