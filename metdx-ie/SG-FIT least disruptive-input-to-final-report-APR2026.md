@@ -526,57 +526,57 @@ Datasets published by meteorological services mapped against availability on thr
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | ------------ | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| ECMWF | ERA5 Reanalysis | Global atmospheric reanalysis at 31 km, 137 levels, hourly from 1940 to present. Temperature, wind, precipitation, pressure and more. | ↗ | ↗ | — |
-| ECMWF | ERA5-Land Reanalysis | High-resolution (9 km) land-surface replay of ERA5. Soil moisture, snow depth, runoff, and 50 variables from 1950 to present. | — | ↗ | — |
-| ECMWF | IFS Open Data (Real-Time Forecasts) | Operational medium-range IFS forecasts at 0.25°. Atmospheric, wave and ensemble products. Updated 4× daily. CC-BY-4.0. | ↗ | — | ↗ |
-| ECMWF | AIFS Open Data (AI Forecasting System) | Deterministic and ensemble AI-based forecasts, released from the same real-time feed as IFS open data. Added to open catalogue in 2024. | ↗ | — | ↗ |
+| ECMWF | ERA5 Reanalysis | Global atmospheric reanalysis at 31 km, 137 levels, hourly from 1940 to present. Temperature, wind, precipitation, pressure and more. | [↗](https://registry.opendata.aws/ecmwf-era5/) | [↗](https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_HOURLY) | — |
+| ECMWF | ERA5-Land Reanalysis | High-resolution (9 km) land-surface replay of ERA5. Soil moisture, snow depth, runoff, and 50 variables from 1950 to present. | — | [↗](https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_HOURLY) | — |
+| ECMWF | IFS Open Data (Real-Time Forecasts) | Operational medium-range IFS forecasts at 0.25°. Atmospheric, wave and ensemble products. Updated 4× daily. CC-BY-4.0. | [↗](https://registry.opendata.aws/ecmwf-forecasts/) | — | [↗](https://planetarycomputer.microsoft.com/dataset/ecmwf-forecast) |
+| ECMWF | AIFS Open Data (AI Forecasting System) | Deterministic and ensemble AI-based forecasts, released from the same real-time feed as IFS open data. Added to open catalogue in 2024. | [↗](https://registry.opendata.aws/ecmwf-forecasts/) | — | [↗](https://planetarycomputer.microsoft.com/dataset/ecmwf-forecast) |
   
 ## EUMETSAT — European Organisation for the Exploitation of Meteorological Satellites  
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | --------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| EUMETSAT / Copernicus | Sentinel-3 OLCI / SLSTR | Ocean colour, land surface and sea surface temperature from ESA/EUMETSAT Sentinel-3. NRT and offline products via Copernicus Data Space. | ↗ | — | — |
-| EUMETSAT / ESA | Sentinel-5P (Tropomi) — Atmospheric Products | Daily global coverage of ozone, NO₂, SO₂, CO, CH₄, aerosol and cloud properties from the Copernicus Sentinel-5 Precursor. | — | ↗ | ↗ |
+| EUMETSAT / Copernicus | Sentinel-3 OLCI / SLSTR | Ocean colour, land surface and sea surface temperature from ESA/EUMETSAT Sentinel-3. NRT and offline products via Copernicus Data Space. | [↗](https://registry.opendata.aws/sentinel-3/) | — | — |
+| EUMETSAT / ESA | Sentinel-5P (Tropomi) — Atmospheric Products | Daily global coverage of ozone, NO₂, SO₂, CO, CH₄, aerosol and cloud properties from the Copernicus Sentinel-5 Precursor. | — | [↗](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_NO2) | [↗](https://planetarycomputer.microsoft.com/dataset/sentinel-5p-l2-netcdf) |
   
 ## NOAA — US National Oceanic and Atmospheric Administration  
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | ------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| NOAA / NESDIS | GOES-16 / 18 / 19 (ABI Level 1b & Level 2) | Full-disc and CONUS geostationary imagery every 10–15 min. Radiance, cloud height, fire, aerosol, rainfall products. Real-time + archive. | ↗ | ↗ | ↗ |
-| NOAA / NWS | NEXRAD Level II & III Radar | Real-time and archive data from the US Next Generation Weather Radar network. Reflectivity, radial velocity, and derived products. | ↗ | — | — |
-| NOAA / NWS | Global Forecast System (GFS) | Operational global NWP model at ~13 km resolution. 4 runs per day, 16-day forecast. Atmosphere, ocean and land parameters. | ↗ | ↗ | — |
-| NOAA / NESDIS | Joint Polar Satellite System (JPSS / Suomi-NPP / NOAA-20/21) | Polar-orbiting constellation measuring SST, vegetation, clouds, rainfall, snow/ice, fire, atmospheric temperature, water vapour, ozone. | ↗ | — | — |
-| NOAA / NWS | National Digital Forecast Database (NDFD) | Gridded sensible weather forecasts (temperature, cloud cover, precipitation type) from NWS field offices; seamless CONUS mosaic. | ↗ | — | — |
+| NOAA / NESDIS | GOES-16 / 18 / 19 (ABI Level 1b & Level 2) | Full-disc and CONUS geostationary imagery every 10–15 min. Radiance, cloud height, fire, aerosol, rainfall products. Real-time + archive. | [↗](https://registry.opendata.aws/noaa-goes/) | [↗](https://developers.google.com/earth-engine/datasets/catalog/NOAA_GOES_16_MCMIPC) | [↗](https://planetarycomputer.microsoft.com/catalog?filter=goes) |
+| NOAA / NWS | NEXRAD Level II & III Radar | Real-time and archive data from the US Next Generation Weather Radar network. Reflectivity, radial velocity, and derived products. | [↗](https://registry.opendata.aws/noaa-nexrad/) | — | — |
+| NOAA / NWS | Global Forecast System (GFS) | Operational global NWP model at ~13 km resolution. 4 runs per day, 16-day forecast. Atmosphere, ocean and land parameters. | [↗](https://registry.opendata.aws/noaa-gfs-bdp-pds/) | [↗](https://developers.google.com/earth-engine/datasets/catalog/NOAA_GFS0P25) | — |
+| NOAA / NESDIS | Joint Polar Satellite System (JPSS / Suomi-NPP / NOAA-20/21) | Polar-orbiting constellation measuring SST, vegetation, clouds, rainfall, snow/ice, fire, atmospheric temperature, water vapour, ozone. | [↗](https://registry.opendata.aws/noaa-jpss/) | — | — |
+| NOAA / NWS | National Digital Forecast Database (NDFD) | Gridded sensible weather forecasts (temperature, cloud cover, precipitation type) from NWS field offices; seamless CONUS mosaic. | [↗](https://registry.opendata.aws/noaa-ndfd/) | — | — |
   
 ## Met Office — UK National Meteorological Service  
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | ------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| Met Office | UKV Deterministic (2 km) — 2-Year Rolling Archive | High-resolution UK and Ireland NWP. Temperature, wind, humidity and pressure on a 2 km grid. NetCDF, updated ~3–6 h after each model run. | ↗ | — | ↗ |
-| Met Office | Global Deterministic (10 km) — 2-Year Rolling Archive | Global NWP on a ~0.09° grid. Forecast parameters across pressure levels and surface. NetCDF; 600 TB+ archive. | ↗ | — | ↗ |
-| Met Office | MOGREPS-UK Ensemble (2.2 km) — 30-Day Rolling Archive | UK ensemble forecast system. 5-day horizon, ~2.2 km resolution, multiple ensemble members. NetCDF via AWS. | ↗ | — | — |
-| Met Office | MOGREPS-G Global Ensemble — 30-Day Rolling Archive | Global ensemble at 20 km, 4 runs/day, out to 198 h. Run as part of the Unified Model operational NWP suite. | ↗ | — | — |
-| Met Office | Global Wave Model — 2-Year Rolling Archive | Significant wave height, period and direction for open ocean and coastal waters. WAVEWATCH III configuration forced by Met Office global winds. | ↗ | — | — |
-| Met Office | NWS Wave model — 2-Year Rolling Archive | Northwest European continental shelf regional wave model predicting sea-state and various sea and swell wave characteristics for waters surrounding the UK. | ↗ | — | — |
-| Met Office | NWS Ocean model — 2-Year Rolling Archive | The Northwest European continental shelf physical ocean model predicts temperature, salinity and circulation for waters surrounding the UK. | ↗ | — | — |
-| Met Office | UK Radar Observations — 2-Year Rolling Archive | The United Kingdom Composite, radar reflectivity derived, surface rain rate estimate product in HDF5. | ↗ | — | — |
-| Met Office | UK Land Surface Observations — 7-Day Rolling Period | Land surface weather observations for 31 parameters from over 250 locations across the Met Office UK land observation network. | ↗ | — | — |
-| Met Office | UK Marine Observations — 7-Day Rolling Period | Marine surface weather observations for 32 parameters from 69 locations across the Met Office marine observation network. | ↗ | — | — |
+| Met Office | UKV Deterministic (2 km) — 2-Year Rolling Archive | High-resolution UK and Ireland NWP. Temperature, wind, humidity and pressure on a 2 km grid. NetCDF, updated ~3–6 h after each model run. | [↗](https://registry.opendata.aws/met-office-uk-deterministic/) | — | [↗](https://planetarycomputer.microsoft.com/dataset/group/met-office-uk-deterministic) |
+| Met Office | Global Deterministic (10 km) — 2-Year Rolling Archive | Global NWP on a ~0.09° grid. Forecast parameters across pressure levels and surface. NetCDF; 600 TB+ archive. | [↗](https://registry.opendata.aws/met-office-global-deterministic/) | — | [↗](https://planetarycomputer.microsoft.com/dataset/group/met-office-global-deterministic) |
+| Met Office | MOGREPS-UK Ensemble (2.2 km) — 30-Day Rolling Archive | UK ensemble forecast system. 5-day horizon, ~2.2 km resolution, multiple ensemble members. NetCDF via AWS. | [↗](https://registry.opendata.aws/met-office-uk-ensemble/) | — | — |
+| Met Office | MOGREPS-G Global Ensemble — 30-Day Rolling Archive | Global ensemble at 20 km, 4 runs/day, out to 198 h. Run as part of the Unified Model operational NWP suite. | [↗](https://registry.opendata.aws/met-office-global-ensemble/) | — | — |
+| Met Office | Global Wave Model — 2-Year Rolling Archive | Significant wave height, period and direction for open ocean and coastal waters. WAVEWATCH III configuration forced by Met Office global winds. | [↗](https://registry.opendata.aws/met-office-global-wave/) | — | — |
+| Met Office | NWS Wave model — 2-Year Rolling Archive | Northwest European continental shelf regional wave model predicting sea-state and various sea and swell wave characteristics for waters surrounding the UK. | [↗](https://registry.opendata.aws/met-office-nws-wave/) | — | — |
+| Met Office | NWS Ocean model — 2-Year Rolling Archive | The Northwest European continental shelf physical ocean model predicts temperature, salinity and circulation for waters surrounding the UK. | [↗](https://registry.opendata.aws/met-office-nws-ocean/) | — | — |
+| Met Office | UK Radar Observations — 2-Year Rolling Archive | The United Kingdom Composite, radar reflectivity derived, surface rain rate estimate product in HDF5. | [↗](https://registry.opendata.aws/met-office-uk-radar-observations/) | — | — |
+| Met Office | UK Land Surface Observations — 7-Day Rolling Period | Land surface weather observations for 31 parameters from over 250 locations across the Met Office UK land observation network. | [↗](https://registry.opendata.aws/met-office-uk-land-observations/) | — | — |
+| Met Office | UK Marine Observations — 7-Day Rolling Period | Marine surface weather observations for 32 parameters from 69 locations across the Met Office marine observation network. | [↗](https://registry.opendata.aws/met-office-uk-marine-observations/) | — | — |
   
 ## JMA — Japan Meteorological Agency  
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | ------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| JMA | Himawari-8/9 (AHI Level 1b) | Geostationary full-disk imagery of East Asia and West Pacific, every 10 min. 16 spectral bands. Archive from July 2015. Distributed by NOAA/NESDIS. | ↗ | — | — |
+| JMA | Himawari-8/9 (AHI Level 1b) | Geostationary full-disk imagery of East Asia and West Pacific, every 10 min. 16 spectral bands. Archive from July 2015. Distributed by NOAA/NESDIS. | [↗](https://registry.opendata.aws/noaa-himawari/) | — | — |
   
 ## NOAA / NASA Joint — Reanalysis & Climate Datasets  
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | ---------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| NOAA / NCEP–NCAR | NCEP/NCAR Reanalysis (R1) | Atmospheric reanalysis from 1948 to present. Sea-level pressure, surface temperature, water vapour at ~2.5° resolution. | — | ↗ | — |
-| NOAA / NCEP | NCEP Climate Forecast System v2 (CFSv2) | Fully coupled atmosphere–ocean–land–sea-ice model. Seasonal forecasts and reanalysis. Hourly products from 1979 onwards. | — | ↗ | — |
-| NOAA / NCEI | PERSIANN-CDR Precipitation | Long-term global daily precipitation estimates from satellite IR imagery using neural networks. 0.25° resolution from 1983 to present. | — | ↗ | — |
-| NOAA / NCEI | Optimum Interpolation SST v2.1 (OISST) | Daily global 0.25° sea surface temperature analysis blending AVHRR satellite and in-situ data. 1981–present. | — | ↗ | — |
+| NOAA / NCEP–NCAR | NCEP/NCAR Reanalysis (R1) | Atmospheric reanalysis from 1948 to present. Sea-level pressure, surface temperature, water vapour at ~2.5° resolution. | — | [↗](https://developers.google.com/earth-engine/datasets/catalog/NCEP_RE_surface_temp) | — |
+| NOAA / NCEP | NCEP Climate Forecast System v2 (CFSv2) | Fully coupled atmosphere–ocean–land–sea-ice model. Seasonal forecasts and reanalysis. Hourly products from 1979 onwards. | — | [↗](https://developers.google.com/earth-engine/datasets/catalog/NOAA_CFSV2_FOR6H) | — |
+| NOAA / NCEI | PERSIANN-CDR Precipitation | Long-term global daily precipitation estimates from satellite IR imagery using neural networks. 0.25° resolution from 1983 to present. | — | [↗](https://developers.google.com/earth-engine/datasets/catalog/NOAA_PERSIANN-CDR) | — |
+| NOAA / NCEI | Optimum Interpolation SST v2.1 (OISST) | Daily global 0.25° sea surface temperature analysis blending AVHRR satellite and in-situ data. 1981–present. | — | [↗](https://developers.google.com/earth-engine/datasets/catalog/NOAA_CDR_OISST_V2_1) | — |
   
 *Created: April 2026. This list is illustrative of open datasets available on cloud-platforms. It is not an exhaustive list.*  
   
