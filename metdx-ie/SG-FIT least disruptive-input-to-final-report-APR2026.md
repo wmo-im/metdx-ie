@@ -200,7 +200,8 @@ The disadvantage of object storage is that it has comparatively high latency. Le
 Cloud-optimzed implies choosing or assigning resources for workloads and applications to improve performance while remaining cost effective. Cloud-optimized formats are designed for object storage with HTTP (range) requests enabling high throughput (i.e., lots of reads) yet mitigating the (comparatively) high object read latency.  
   
 The key characteristics of a cloud-optimized format are:  
-* Treat the whole dataset as a single resource (i.e., an entire weather prediction model run “==hypercube== “ is presented as an addressable object).  
+* Treat the whole dataset as a single resource (i.e., an entire weather prediction model run “==hypercube== “ is presented as an addressable object).
+* Resources are described independently of their underlying storage structures; for example, a single parameter representing an entire weather prediction model run.
 * Minimize the number of reads needed to determine location of the bytes you need (i.e., package metadata together to make it easy to access).  
 * Store data as small addressable chunks (files, tiles, or both) which enables data reads to be parallelised into many small requests.   
 * Hide the chunking complexity from the user – now the chunking doesn’t have to be a compromise of read-performance (which favours many small-sized chunks) vs. file-management (where fewer, larger chunks are better because of the overhead for users working with them).  
@@ -395,7 +396,7 @@ array([277.17514648, 276.23178711, 277.2572998 , 277.56884766,
 > **Note on xarray operations:**  
 > * `open_dataset()` is the “Swiss Army knife” - but you need to tell it which dataset engine to use.  
 > * `open_zarr()` is a convenience wrapper that only works with Zarr.  
-> * `open-mf()` opens multiple files and combines them into a single (in-memory) virtual datacube.  
+> * `open-mfdataset()` opens multiple files and combines them into a single (in-memory) virtual datacube.  
 >   
   
 OCG API Maps profile:  
@@ -552,11 +553,16 @@ Datasets published by meteorological services mapped against availability on thr
 
 | Organisation | Dataset | Description | AWS | GEE | MPC |
 | ------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
-| Met Office | UKV Deterministic (2 km) — 2-Year Rolling Archive | High-resolution UK and Ireland NWP. Temperature, wind, humidity and pressure on a 2 km grid. NetCDF, updated ~3–6 h after each model run. | ↗ | — | — |
-| Met Office | Global Deterministic (10 km) — 2-Year Rolling Archive | Global NWP on a ~0.09° grid. Forecast parameters across pressure levels and surface. NetCDF; 600 TB+ archive. | ↗ | — | — |
+| Met Office | UKV Deterministic (2 km) — 2-Year Rolling Archive | High-resolution UK and Ireland NWP. Temperature, wind, humidity and pressure on a 2 km grid. NetCDF, updated ~3–6 h after each model run. | ↗ | — | ↗ |
+| Met Office | Global Deterministic (10 km) — 2-Year Rolling Archive | Global NWP on a ~0.09° grid. Forecast parameters across pressure levels and surface. NetCDF; 600 TB+ archive. | ↗ | — | ↗ |
 | Met Office | MOGREPS-UK Ensemble (2.2 km) — 30-Day Rolling Archive | UK ensemble forecast system. 5-day horizon, ~2.2 km resolution, multiple ensemble members. NetCDF via AWS. | ↗ | — | — |
 | Met Office | MOGREPS-G Global Ensemble — 30-Day Rolling Archive | Global ensemble at 20 km, 4 runs/day, out to 198 h. Run as part of the Unified Model operational NWP suite. | ↗ | — | — |
 | Met Office | Global Wave Model — 2-Year Rolling Archive | Significant wave height, period and direction for open ocean and coastal waters. WAVEWATCH III configuration forced by Met Office global winds. | ↗ | — | — |
+| Met Office | NWS Wave model — 2-Year Rolling Archive | Northwest European continental shelf regional wave model predicting sea-state and various sea and swell wave characteristics for waters surrounding the UK. | ↗ | — | — |
+| Met Office | NWS Ocean model — 2-Year Rolling Archive | The Northwest European continental shelf physical ocean model predicts temperature, salinity and circulation for waters surrounding the UK. | ↗ | — | — |
+| Met Office | UK Radar Observations — 2-Year Rolling Archive | The United Kingdom Composite, radar reflectivity derived, surface rain rate estimate product in HDF5. | ↗ | — | — |
+| Met Office | UK Land Surface Observations — 7-Day Rolling Period | Land surface weather observations for 31 parameters from over 250 locations across the Met Office UK land observation network. | ↗ | — | — |
+| Met Office | UK Marine Observations — 7-Day Rolling Period | Marine surface weather observations for 32 parameters from 69 locations across the Met Office marine observation network. | ↗ | — | — |
   
 ## JMA — Japan Meteorological Agency  
 
