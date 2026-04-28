@@ -7,7 +7,7 @@
 
 [candidate text for the open paragraphs introducing the work of SG-FIT]
 
-In the weather and climate community, the existing data distribution model pushes copies of data to recipients. But with growing data volumes this no longer scales.  
+In the weather and climate community, the existing data distribution model pushes copies of data to recipients. But with growing data volumes, scaling becomes increasingly complex and cost prohibitive.  
   
 Future Data Infrastructure: Don’t move (all) the data.  
   
@@ -18,7 +18,7 @@ The challenges with large data volumes are threefold:
 2. Even if one could move large volume data, many users lack the necessary local capacity and capability to manage a copy of the data.   
 3. And finally, it’s much harder to confirm the authenticity and veracity of datasets when working with copies (e.g., they may have been subject to local modification).   
   
-ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. Version is 5 is 5PB. Version 6 is predicted to be 30PB. What do you do with several petabytes when it’s downloaded?  
+ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. Version is 5 is 5PB. Version 6 is predicted to be 30Pb. What do you do with several petabytes when it’s downloaded?  
    
 Strategies for better (more effective) data sharing:  
 1. Let users download only the data they need (Web-based data APIs);  
@@ -64,10 +64,10 @@ We use the term “least disruptive” for approaches that complement existing W
 * WIS-TECHSPEC-2: PUBLISHING DATA AND DISCOVERY METADATA  
   
 These technical specifications require that:  
-1. Data and metadata are accessible using open protocols (HTTPS).  
-2. Encode data in open, community-agreed formats (e.g., for WMO World Weather Watch use GRIB2 and BUFR).  
-3. Provide good discovery metadata (WMO Core Metadata Profile v2, WCMP2).  
-4. Provide pub/sub notifications (MQTT) about the availability of new or updated data and metadata (WIS2 Notification Message, WNM).  
+1. Data and metadata are accessible using open protocols (HTTP).  
+2. Encode data in open, community-agreed formats (e.g., for WMO World Weather Watch use GRIB2 and BUFR4).  
+3. Provide suitable discovery metadata (WMO Core Metadata Profile v2 [WCMP2]).  
+4. Provide Publish-Subscribe notifications (MQTT) about the availability of new or updated data and metadata (WIS2 Notification Message [WNM]).  
   
 (1), (2) and (3) combined with the WIS2 Global Services and the WMO Codes Registry [^2] go much of the way to delivering the FAIR Principles [^3]. (4) notifies users/agents (humans and software systems) in near-real-time at scale when new or updated data and metadata becomes available.   
   
@@ -77,7 +77,7 @@ The approaches outlined below are derived from implementation experience. The St
   
 ### Web-based APIs  
   
-A Web-based Application Programming Interface (API) is a way for one computer program to use standard Web requests to ask another program hosted elsewhere on the internet for data or to perform an action. One does not need to download and interpret a set of resources (i.e., data files), instead a request can be sent to the remote computer to perform an operation on those resources.      
+A Web-based Application Programming Interface (API) is a way for one computer program to use standard Web requests (via HTTP) to ask another program hosted elsewhere on the Internet for data or to perform an action. One does not need to download and interpret a set of resources (i.e., data files), instead a request can be sent to the remote computer to perform an operation on those resources.      
   
 Web-based APIs:  
 * Describe the operation(s) they can perform.   
@@ -91,13 +91,13 @@ Three types of operation are particularly relevant where one aims to reduce the 
   
 #### OGC APIs  
   
-Since 2009, a memorandum of understanding has been in place between the Open Geospatial Consortium (OGC) [^4] and the WMO to ensure that the standards adopted in the geospatial world are fit for meteorology.   
+Since 2009, a Memorandum of Understanding (MoU) has been in place between the Open Geospatial Consortium (OGC) [^4] and the WMO to ensure that the standards adopted in the geospatial world are fit for meteorology.   
   
-Consequently, the OGC APIs are a good match for data-sharing needs within the meteorological community. The key benefits of OGC APIs are:  
+Consequently, [OGC APIs](https://ogcapi.ogc.org) are a good match for data-sharing needs within the meteorological community. The key benefits of OGC APIs are:  
   
 * *Developer accessibility* — OGC APIs use standard Web addresses and HTTP methods to interact with resources (i.e., REST conventions), and return JSON responses. A Web developer can consume geospatial data using the same tools and mental models they use for any other API, thus widening the pool of people who can work with geospatial data.  
 * *Discoverability & self-documentation* — Each OGC API exposes an OpenAPI document [^5], meaning services are machine-readable and can be explored via commons tools. You don't need specialist knowledge just to understand what a service offers.  
-* *Modularity* — The suite of operations is broken into focused building blocks: OGC API – Features, Tiles, Maps, Coverages, Processes, Records, and so on. Implementers adopt only the parts they need, rather than one monolithic standard.  
+* *Modularity* — The suite of operations is realized by reusable building blocks: OGC API – Features, Tiles, Maps, Coverages, Processes, Records, and so on. Implementers adopt only the parts they need, rather than one monolithic standard.  
 * *Web-native interoperability* — Like WIS2, OGC APIs are Web-native, making deployment and scaling straightforward.  
   
 Data publishers have a standard way to expose geospatial datasets that modern consumers can actually use without friction. Application developers to integrate geospatial data without learning a new stack of GIS-specific tooling. Enterprises benefit from reduced vendor lock-in since the standards are open and broadly implemented.  
@@ -107,7 +107,7 @@ Three of the OGC APIs are particularly relevant:
 2. *OGC API — Maps* is a standard Web API specification that allows clients to retrieve geo-referenced map images (rendered visual representations of spatial data) from a server by requesting a defined area, scale, and style over the web. The specification is published by the Open Geospatial Consortium and is available at [ogcapi.ogc.org/maps](https://ogcapi.ogc.org/maps).  
 3. *OGC API — Processes Part 1* is a standard web API specification that enables clients to discover, execute, and retrieve the results of geospatial processing operations hosted on a remote server — such as running a spatial analysis, a data transformation, or calculating summary statistics — using standard HTTP requests. The specification is published by the Open Geospatial Consortium and is available at [ogcapi.ogc.org/processes](https://ogcapi.ogc.org/processes).  
   
-OGC-APIs require a server to interpret and execute requests from users. An advantage of this approach is that complex data storage is not exposed to the users; they only see how the service operator has chosen to organise the data for them. However, a server will consume compute resource - which may be non-trivial if serving popular data to a large community.   
+OGC APIs require a server to interpret and execute requests from users. An advantage of this approach is that complex data storage is not exposed to the users; they only see how the service operator has chosen to organise the data for them. However, a server will consume compute resource - which may be non-trivial if serving popular data to a large community.   
   
 Generally, Earth-system datasets are too big to publish as single resource: most data publishers provide datasets as sets of objects or files. In fact, this commonly used pattern is how WMO has been publishing data for decades (e.g., NWP model data as GRIB files). Rather than providing a server to interpret users’ requests, users can download the subset of objects or files that contain the data they need. The challenge is helping users determine which of the objects or files contain the data they need.  
   
@@ -115,7 +115,7 @@ ECMWF and NOAA recognise the problem and have independently adopted a similar co
   
 A standardised approach is adopted by OGC providing a fourth, albeit slightly different, kind of Web API:
 <ol start="4">  
-<li>STAC — SpatioTemporal Asset Catalog is a community-driven specification that provides a common, JSON-based structure for describing and cataloguing geospatial assets — such as satellite imagery, aerial photography, or climate datasets — making them easily discoverable, searchable, and accessible on the web through a consistent set of metadata fields and links. Originating from the Earth observation community, STAC has been adopted by the OGC as a community standard, reflecting its broad uptake across government agencies, cloud providers, and the geospatial industry as a de facto approach to publishing and discovering spatio-temporal data at scale. The specification and further resources are available at <a href="https://stacspec.org/">stacspec.org</a>.</li>
+<li>STAC — SpatioTemporal Asset Catalog is a community-driven suite of specifications that provides a common, JSON-based structure for describing and cataloguing geospatial assets — such as satellite imagery, aerial photography, or climate datasets — making them easily discoverable, searchable, and accessible on the web through a consistent set of metadata fields and links. Originating from the Earth observation community, STAC has been adopted by the OGC as a community standard, reflecting its broad uptake across government agencies, cloud providers, and the geospatial industry as a de facto approach to publishing and discovering spatio-temporal data at scale. The specification and further resources are available at <a href="https://stacspec.org/">stacspec.org</a>.</li>
 </ol>   
   
 #### Profiles  
@@ -136,8 +136,8 @@ To support interoperable data exchange within WIS2, service profiles are require
   
 #### Implementation evidence  
   
-* pygeoapi an open source Python server implementation of the suite of OGC APIs. Used extensively by Environment Canada, the GeoMet API platform uses pygeoapi in production to provide access to archive climate and water data, real-time hydrometric data, and surface weather observations. [https://pygeoapi.io](https://pygeoapi.io)   
-* WIS2 in a box (wis2box) is a reference implementation of a WIS2 Node. It includes a dedicated wis2box-api component providing OGC APIs to discover, access, and visualise notifications, data collections, and configurations (datasets and stations). This implementation is powered by pygeoapi. [https://docs.wis2box.wis.wmo.int/](https://docs.wis2box.wis.wmo.int/)   
+* pygeoapi an open source Python server Reference Implementation of the suite of OGC APIs. pygeoapi is used extensively by numerous organizations (including Environment and Climate Change Canada and ECMWF).  ECCC's [MSC GeoMet API platform](https://eccc-msc.github.io/open-data/msc-geomet/readme_en) uses pygeoapi in 24/7 production to provide access to NWP, radar, alerts, archive climate and water data, real-time hydrometric data, and surface weather observations. [https://pygeoapi.io](https://pygeoapi.io)   
+* WIS2 in a box (wis2box) is a Reference Implementation of a WIS2 Node. It includes a dedicated wis2box-api component providing OGC APIs to discover, access, and visualise notifications, data collections, and configurations (datasets and stations). This implementation is powered by pygeoapi. [https://docs.wis2box.wis.wmo.int/](https://docs.wis2box.wis.wmo.int/)   
 * ECMWF Polytope is an open source library for extracting complex data from datacubes. Its API enables any arbitrary n-dimensional polygon (called a polytope) to be extracted from a datacube, allowing for efficient extraction of complex features, such as polygon regions or spatio-temporal paths. Like OGC API EDR, Polytope encodes data in CoverageJSON. Polytope also mirrors the query patterns of OGC API EDR: feature extraction allows users to request standard meteorological features such as time series, vertical profiles, and arbitrary polygons, retrieving only the data they need rather than downloading global fields. This makes polytope an ideal backend to plugin to pygeoapi. [https://github.com/ecmwf/polytope](https://github.com/ecmwf/polytope)   
 * ECMWF earthkit is an open source library, providing powerful tools for speeding up weather and climate science workflows by simplifying data access, processing, analysis, visualisation and much more. earthkit-data module makes it easy for users to read, inspect, and slice data from a wide range of geospatial input types, with a dedicated component to handle CoverageJSON data served by the Polytope.  [https://github.com/ecmwf/earthkit](https://github.com/ecmwf/earthkit)  
 * EUMETNET MeteoGate is a federated data sharing platform developed and operated by EUMETNET that provides a unified technical infrastructure for the discovery and access of meteorological and hydrological data across Europe and beyond. MeteoGate enables European National Meteorological Services to openly share their data through a combination of an API Gateway, a Data Explorer for discovery and browsing, and integration with WIS2. The platform emerged from the EU- and EUMETNET-funded RODEO project and is designed to meet EU obligations under the Open Data Directive and the High Value Datasets regulation, bringing together data assets including land-based surface observations, weather radar composites, climate datasets, and severe weather warnings. OGC API EDR is the mandated standard for data access across MeteoGate, representing one of the most significant real-world deployments of OGC APIs in the European meteorological domain. Data access components within MeteoGate use OGC API EDR as the MeteoGate-compliant standard for providing interactive API access to datasets and collections. The E-SOH (EUMETNET Supplementary Observations Hub) operational system, run by DWD on the European Weather Cloud, uses the OGC API EDR interface for retrieving land-based surface observations. EUMETNET has further invested in the wider OGC API ecosystem by publishing a MetOcean profile of OGC API EDR, defining meteorological community conventions for parameter naming, response encoding using CoverageJSON, and coordinate reference systems. [https://meteogate.eu](https://meteogate.eu)   
@@ -259,7 +259,7 @@ The core Polytope library and the client are both open source under the Apache 2
 ECMWF zfdb is an experimental open-source Python library that implements a Zarr store using ECMWF's Fields DataBase (FDB) as its backend, allowing users to access GRIB meteorological data stored in the FDB as if it were a native Zarr dataset. Rather than converting or duplicating data into a new format, zfdb creates virtual Zarr v3 views by translating Zarr access patterns into MARS language requests — the same domain-specific vocabulary used to query ECMWF's meteorological archive — and leveraging the FDB's efficient indexing of GRIB fields by semantic metadata such as parameter, level, date, and step. Unlike related virtualisation approaches such as VirtualiZarr or Kerchunk, which operate on static file references, zfdb is dynamic: views are defined programmatically using MARS keywords and chunked along temporal or step axes, enabling integration with standard Python scientific tools such as xarray and zarr. Developed as part of the WarmWorld Easier project — which aims to improve interoperability of climate and weather data across European HPC centres — the library is currently described as an experiment rather than a production system, but represents a significant step toward bridging ECMWF's established GRIB-based data infrastructure with the cloud-native Zarr ecosystem increasingly adopted for machine learning and big-data analytics workflows.  
   
 ##### Environment and Climate Change Canada / Met Service Canada Virtual Optimal Forecast (VOF) over Zarr  
-With their Virtual Optimal Forecast initiative, MSC are using cloud-optimised data stores (Zarr hosted on OpenShift private cloud infrastructure) to serve all visualisations for the ECCC public website. Data from now cast (0-6h), deterministic hi-res (6-48h), and  global (48h+) is stitched together to create a single “virtual” forecast and exposed through OGC API services using pygeoapi. To manage load on the private cloud infrastructure, the OGC API services and Zarr stores are not publicly accessible; the data may only be accessed via the public website.   
+As part of their next generation forecasting data dissemination, MSC are using cloud-optimised data stores (Zarr hosted on OpenShift private cloud infrastructure) to serve all visualisations for the ECCC public website. Data from nowcast (0-6h), deterministic hi-res (6-48h), and  global (48h+) is stitched together to create a single “virtual” forecast and exposed through OGC API services using pygeoapi. To manage load on the private cloud infrastructure, the OGC API services and Zarr stores are not publicly accessible; the data may only be accessed via the public website.   
   
 ##### NASA evaluation of Earthmover Icechunk  
 [Solving NASA’s Cloud Data Dilemma: How Icechunk Revolutionises Earth Data Access](https://www.earthmover.io/blog/nasa-icechunk/)  
@@ -285,7 +285,7 @@ Components include ([diagram](https://github.com/wmo-im/metdx-demo/blob/main/doc
 7. Data visualisation server (OGC API Maps).  
 8. Data processing and charting server (OGC API Processes).  
   
-Components are deployable as docker containers.  
+Components are deployable as Docker containers.  
   
 OGC API implementations:  
 * pygeoapi — with native support for Xarray resources.  
@@ -403,7 +403,7 @@ OCG API Maps profile:
 * Collection instance: single model run, all parameters with consistent domain (note: models output data on several vertical reference systems — pressure levels, surface, whole-earth, etc.; consequently a model run may map to several Collections).  
 * Extend Maps to add custom parameter-name queryable (Maps operation is tied to Collection; a collection will likely include many parameters; we need to instruct the Map service which parameter to visualise). (discussion: [Issue opengeospatial/ogcapi-maps#142](https://github.com/opengeospatial/ogcapi-maps/issues/142)).  
 * Use subset queryable for subsetting on enumerated dimensions (e.g., pressure level, ensemble member).  
-* Dimensions and parameter names defined in the `/collections/{collection-id}/schema` end-point (see [OGC API - Common - Part 3: Common: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)).  
+* Dimensions and parameter names defined in the `/collections/{collection-id}/schema` endpoint (see [OGC API - Common - Part 3: Common: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)).  
 * Servers shall not interpolate between enumerated dimensions (instance, time-step, vertical level). On error, return a list of the valid values for the dimension.  
 * Servers shall return a 2-d image in horizontal x-y plane (more sophisticated cases may be added in future, e.g., vertical slices, Hovmöller diagram). If the query isn’t constrained (e.g., z dimension is not specified) the server will choose how to reduce the data to a 2-d horizontal plane. This ensures that standard ogcapi-maps queries will work, albeit with limited dimensionality.  
   
@@ -419,9 +419,9 @@ OGC API Environmental Data Retrieval (EDR) profile:
 * Parameter names should be consistent, concise and human readable. Propose a standard list of names for common parameters (the 16 parameters defined in Manual on WIPPS for global deterministic weather prediction data) based on ECMWF eccodes short-names.  
 * Unified additional dimensions used to define enumerated dimensions (e.g., pressure levels, ensemble members).  
 * Servers shall not interpolate between enumerated dimensions (instance, time-step, vertical level). On error, return a list of the valid values for the dimension.  
-* Servers shall return CoverageJSON (MIME type: `vnd.cov+json`) as a minimum.     
+* Servers shall return CoverageJSON (MIME type: `application/vnd.cov+json`) as a minimum.     
   
-Example position query: `coords=POINT(-75 45)`, `parameter-name=AirTemp`  
+Example position query: `coords=POINT(-75 45)&parameter-name=AirTemp`  
 ```
 https://example.com/collections/ca-eccc-msc-nwp-gdps/position?f=json&coords=POINT%28%20-75%2045%29&parameter-name=AirTemp
 
