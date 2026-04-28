@@ -18,7 +18,7 @@ The challenges with large data volumes are threefold:
 2. Even if one could move large volume data, many users lack the necessary local capacity and capability to manage a copy of the data.   
 3. And finally, it’s much harder to confirm the authenticity and veracity of datasets when working with copies (e.g., they may have been subject to local modification).   
   
-ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. Version is 5 is 5 petabytes. Version 6 is predicted to be significantly bigger. What do you do with several petabytes when it’s downloaded?  
+ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. ERA5 is 12 petabytes. Version 6 is predicted to be ~25 petabytes. What do you do with several petabytes even when it’s downloaded?  
    
 Strategies for better (more effective) data sharing:  
 1. Let users download only the data they need (Web-based data APIs);  
@@ -111,7 +111,7 @@ OGC APIs require a server to interpret and execute requests from users. An advan
   
 Generally, Earth-system datasets are too big to publish as single resource: most data publishers provide datasets as sets of objects or files. In fact, this commonly used pattern is how WMO has been publishing data for decades (e.g., NWP model data as GRIB files). Rather than providing a server to interpret users’ requests, users can download the subset of objects or files that contain the data they need. The challenge is helping users determine which of the objects or files contain the data they need.  
   
-ECMWF and NOAA recognise the problem and have independently adopted a similar concept: providing light-weight sidecar index files published alongside the GRIB files themselves. This is not standardised; ECMWF and NOAA use different tooling and formats.  
+ECMWF and NOAA recognise the problem and have independently adopted data models, tools and services which allow users to find the data they need. This is not standardised; ECMWF and NOAA use different tooling and formats.  
   
 A standardised approach is adopted by OGC providing a fourth, albeit slightly different, kind of Web API:
 <ol start="4">  
@@ -138,7 +138,7 @@ To support interoperable data exchange within WIS2, service profiles are require
   
 * pygeoapi an open source Python server Reference Implementation of the suite of OGC APIs. pygeoapi is used extensively by numerous organizations (including Environment and Climate Change Canada and ECMWF).  ECCC's [MSC GeoMet API platform](https://eccc-msc.github.io/open-data/msc-geomet/readme_en) uses pygeoapi in 24/7 production to provide access to NWP, radar, alerts, archive climate and water data, real-time hydrometric data, and surface weather observations. [https://pygeoapi.io](https://pygeoapi.io)   
 * WIS2 in a box (wis2box) is a Reference Implementation of a WIS2 Node. It includes a dedicated wis2box-api component providing OGC APIs to discover, access, and visualise notifications, data collections, and configurations (datasets and stations). This implementation is powered by pygeoapi. [https://docs.wis2box.wis.wmo.int/](https://docs.wis2box.wis.wmo.int/)   
-* ECMWF Polytope is an open source library for extracting complex data from datacubes. Its API enables any arbitrary n-dimensional polygon (called a polytope) to be extracted from a datacube, allowing for efficient extraction of complex features, such as polygon regions or spatio-temporal paths. Like OGC API EDR, Polytope encodes data in CoverageJSON. Polytope also mirrors the query patterns of OGC API EDR: feature extraction allows users to request standard meteorological features such as time series, vertical profiles, and arbitrary polygons, retrieving only the data they need rather than downloading global fields. This makes polytope an ideal backend to plugin to pygeoapi. [https://github.com/ecmwf/polytope](https://github.com/ecmwf/polytope)   
+* ECMWF Polytope is an open source library for extracting complex data from datacubes. Its API enables any arbitrary n-dimensional polygon (called a polytope) to be extracted from a datacube, allowing for efficient extraction of complex features, such as polygon regions or spatio-temporal paths. Like OGC API EDR, Polytope encodes data in CoverageJSON. Polytope also mirrors the query patterns of OGC API EDR: feature extraction allows users to request standard meteorological features such as time series, vertical profiles, and arbitrary polygons, retrieving only the data they need rather than downloading global fields. Polytope is a data service served by ECMWF for their operational data and Destination Earth data, but can also be used effectively as a backend to plugin to pygeoapi. [https://github.com/ecmwf/polytope](https://github.com/ecmwf/polytope)   
 * ECMWF earthkit is an open source library, providing powerful tools for speeding up weather and climate science workflows by simplifying data access, processing, analysis, visualisation and much more. earthkit-data module makes it easy for users to read, inspect, and slice data from a wide range of geospatial input types, with a dedicated component to handle CoverageJSON data served by the Polytope.  [https://github.com/ecmwf/earthkit](https://github.com/ecmwf/earthkit)  
 * EUMETNET MeteoGate is a federated data sharing platform developed and operated by EUMETNET that provides a unified technical infrastructure for the discovery and access of meteorological and hydrological data across Europe and beyond. MeteoGate enables European National Meteorological Services to openly share their data through a combination of an API Gateway, a Data Explorer for discovery and browsing, and integration with WIS2. The platform emerged from the EU- and EUMETNET-funded RODEO project and is designed to meet EU obligations under the Open Data Directive and the High Value Datasets regulation, bringing together data assets including land-based surface observations, weather radar composites, climate datasets, and severe weather warnings. OGC API EDR is the mandated standard for data access across MeteoGate, representing one of the most significant real-world deployments of OGC APIs in the European meteorological domain. Data access components within MeteoGate use OGC API EDR as the MeteoGate-compliant standard for providing interactive API access to datasets and collections. The E-SOH (EUMETNET Supplementary Observations Hub) operational system, run by DWD on the European Weather Cloud, uses the OGC API EDR interface for retrieving land-based surface observations. EUMETNET has further invested in the wider OGC API ecosystem by publishing a MetOcean profile of OGC API EDR, defining meteorological community conventions for parameter naming, response encoding using CoverageJSON, and coordinate reference systems. [https://meteogate.eu](https://meteogate.eu)   
 * FMI SmartMet Server demonstrates evidence for OGC API adoption at operational scale. SmartMet Server is a high-capacity, high-availability data and product server for MetOcean data, written in C++ and in continuous operational use at FMI since 2008, underpinning FMI's Open Data Portal since 2013. The platform follows a plugin-based architecture in which individual OGC API standards are implemented as discrete, interchangeable plugins. The server is published under the MIT licence and freely available on GitHub, meaning FMI's implementation has become a reusable reference platform that other National Meteorological Services can adopt. Notably, FMI's EDR API and Surface Observations API are cited directly in EUMETNET MeteoGate documentation as reference implementation examples for Data Publishers looking to understand how to publish data in a MeteoGate-compatible, OGC API EDR compliant setup. [https://github.com/fmidev/smartmet-server](https://github.com/fmidev/smartmet-server)    
@@ -148,17 +148,18 @@ To support interoperable data exchange within WIS2, service profiles are require
 * DestinE Data Lake Harmonised Data Access (HDA) API provides a STAC interface for data discovery and access. [https://destine-data-lake-docs.data.destination-earth.eu/en/latest/dedl-discovery-and-data-access/Harmonized-Data-Access/API-Architecture/API-Architecture.html](https://destine-data-lake-docs.data.destination-earth.eu/en/latest/dedl-discovery-and-data-access/Harmonized-Data-Access/API-Architecture/API-Architecture.html)   
   
 ### Objects not files  
+
+[we edited this section to be a bit more accurate but now I'm wondering why we even talk about object stores. I don't think anything we are doing with OGC standards is particularly tied to object storage? Its obviously convenient and a good way to store data that we then serve with OGC APIs, but does it actually matter here?]
   
-Three varieties of storage mechanism are in common use today — each with their advantages:  
-1. Block stores provide high-speed, low-latency data IO with raw block access.  
-2. Filesystems support legacy applications.  
-3. Object stores prioritise scaleability and throughput.  
+Three storage interfaces are in common use today, each presenting a different model to applications:
+
+1. Block stores expose storage as a flat array of fixed-size blocks, addressed by number — the lowest-level interface, usually chosen for raw IO performance.
+2. Filesystems present a hierarchical namespace of named files with POSIX-style read/write/seek semantics — the dominant interface for general-purpose software.
+3. Object stores present a flat keyspace of blobs with rich metadata — designed around large, network-distributed data.
+
+These interfaces are usually layered. ECMWF's exabyte-scale MARS archive, for example, exposes meteorological data as an object store while using filesystems and block storage underneath. For meteorological data at this scale, the object-store abstraction has proven the right choice. Modern cloud-native object stores make it easier than ever to deploy, abstracting both data access and service management, and complement elastic compute with equally elastic IO.
   
-For example: ECMWF’s multi-petabyte MARS is entirely based on object storage, yet DestinE (Destination Earth, a flagship initiative of the European Commission developing a digital twin of the Earth) uses block storage under the hood for outright speed.  
-  
-Each mechanism has its place, but object stores are the superior choice for managing data at unlimited scale. Object stores are often provided as part of cloud-based infrastructure, complementing elastic compute with highly-scalable IO.  
-  
-Object stores have the following characteristics:  
+Cloud-native Object stores have the following characteristics:  
 * *Scalability* — Object stores are designed to scale horizontally to exabytes of data.  
 * *Durability and availability* — Data can be replicated across multiple (geographic) zones with very high durability and automated integrity checking (e.g., S3 provides “11-nines” durability).  
 * *Cost effective* — Service providers may offer tiered storage (e.g., hot, cool, archive) to optimise cost based on access patterns; essentially, this means offsetting costs by accepting slower read speeds.  
@@ -166,7 +167,10 @@ Object stores have the following characteristics:
 * *Event-driven integration* — Support for triggers on object creation or modification which is useful for automating workflows.   
   
 In summary, publishing data as objects enables cost effective yet massively parallel querying and near-infinite scaling of durable storage. Consequently, object storage is a great choice for publishing large data volumes to a big audience. Support for byte-range queries (i.e., requesting just a part, a range of bytes, from an object) means that data users can further reduce the volume of data downloaded.  
-  
+
+
+
+[is this needed?]
 > [!NOTE]  
 > **Examples of Tiered Storage Classes**: AWS S3 storage classes [https://aws.amazon.com/s3/storage-classes/](https://aws.amazon.com/s3/storage-classes/)   
 > * S3 Standard: Hot tier for frequently accessed data. General purpose. Amazon S3 provides **99.999999999% durability** (often referred to as "11 nines") for objects stored in its standard storage classes.  
@@ -180,14 +184,50 @@ In summary, publishing data as objects enables cost effective yet massively para
   
 [Annex 1](#annex-1.-meteorological-open-datasets-published-on-cloud-platforms) provides a list of open meteorological datasets that are published on cloud-platform object stores. This list is not intended to be exhaustive, only to illustrate that publishing data in this way is common place.  
   
-### Use cloud-optimised formats  
+### Analysis-Ready, Cloud-Optimised (ARCO) data  
   
-The disadvantage of object storage is that it has comparatively high latency. Let’s illustrate this with an example based on weather prediction model output:  
-* Model output is a set of n-dimensional arrays (x, y, z, t) for a long list of physical parameters (i.e., a ==hypercube==).  
-* The data is chunked into thousands of discrete files - breaking a large dataset into smaller, more manageable, individually compressed pieces.  
-* Format-specific headers contain metadata about the content of each file.  
-* To extract data necessary for an analysis, one must determine the content in each file.  
-* Opening each file to read the metadata and building an index is inefficient in an object store — unlike traditional filesystems.  
+Earth-system datasets are large, are growing, and are increasingly accessed by users and applications that have neither the capacity nor the desire to download them. Two related properties make a dataset useful in this setting:  
+  
+* *Analysis-Ready* — the data is directly usable for analysis without further transformation. It is findable, accessible, interoperable and reusable (FAIR), and the burden of preparation on the user is as low as practicable. What counts as "ready" is consumer-dependent: different analyses require different preprocessing, and a dataset that is analysis-ready for one community may not be for another.  
+* *Cloud-Optimised* — access to the data is optimised for minimal data transfer and minimal cost. Reading is stateless or streamed, does not depend on the user's local filesystem, and allows selective access to discrete segments of the underlying data without retrieving the whole.  
+  
+Together — Analysis-Ready, Cloud-Optimised, or *ARCO* — these properties allow many users to extract just the data they need from very large datasets, on demand, without copies. ARCO is a property of how data is *accessed*, not of any particular file format on disk. The same primary data can be exposed through several ARCO access paths in parallel, each tuned for a different class of user.  
+  
+### Cloud-optimised access  
+  
+Cloud-optimised access has a small set of characteristic properties, regardless of how it is implemented:  
+  
+* *Selective access to discrete segments* — clients can fetch arbitrary subsets (a region, a time-series at a point, a single parameter at a single step) without reading the whole dataset.  
+* *Stateless or streaming reads* — access works over standard HTTP, with no dependence on the client's local filesystem and no large local working copy.  
+* *Minimised data transfer* — the bytes returned are close to the bytes the analysis actually needs; metadata and indices are arranged so that the number of reads required to locate and fetch those bytes is small.  
+* *Parallelisable* — many small requests can be issued in parallel, allowing applications to turn a time-bound problem into a resource-bound one (see *Proximate compute*, above).  
+* *Lazy materialisation* — the dataset is described to the client as a logical n-dimensional structure (a ==hypercube==); concrete bytes are fetched only as the application reads from regions of that structure.  
+* *Decoupled from primary storage layout* — the access path is described independently of the underlying storage structure, so the same logical view can be served from different physical layouts, or from copies tuned for different access patterns.  
+  
+These are properties of an *access pattern*, not of a single on-disk format. There are several complementary ways to deliver them, and a data publisher will typically combine more than one.  
+  
+#### Approaches to cloud-optimised access  
+  
+Three complementary approaches have emerged in the weather and climate community. They are not mutually exclusive: the same primary archive can be exposed via more than one, and a publisher will typically pick the combination that fits their data, their users and their infrastructure budget.  
+  
+1. *Cloud-optimised formats* — write (or rewrite) the data into a chunked, compressed format that is itself designed to be served over HTTP. Each chunk can be fetched independently. This gives the best raw read performance for the chunking dimensions chosen, at the cost of an extra copy of the data.  
+2. *Feature extraction over native data* — keep the data in its primary archive format and provide a service that, given a high-level request (a region, a trajectory, a time-series), jumps to and returns only the relevant bytes. This avoids copies but requires a server with knowledge of the underlying data layout.  
+3. *Virtual cloud-optimised views* — present a cloud-optimised interface (for example a Zarr-shaped API) that is dynamically backed by the primary archive, with no data duplication. This combines the familiar client-side API of approach (1) with the no-copy property of approach (2).  
+  
+##### Cloud-optimised formats  
+  
+A cloud-optimised format stores data as many small, independently addressable chunks, alongside metadata that describes the logical n-dimensional structure of the dataset. Clients read the metadata once to build an empty in-memory representation of the dataset, then issue parallel HTTP (range) requests for just the chunks they need.  
+  
+The key characteristics of a cloud-optimised format are:  
+  
+* Resources are described independently of their underlying storage structures. A single parameter spanning an entire model run can be presented as one logical resource, rather than thousands of small files.  
+* The number of reads needed to locate the required bytes is minimised — metadata is packaged together so that clients do not need to open many objects to find what they want.  
+* Data is stored as small addressable chunks (files, tiles, or both), so reads can be parallelised into many small requests.  
+* The chunking is hidden from the user; the format library converts logical reads on the dataset into the corresponding chunk reads.  
+* Lazy-loading is supported — the metadata is used to build an empty hypercube in memory, and chunks are fetched only when the application reads from them.  
+* HTTP range-requests are supported, so clients can fetch sub-chunk byte ranges where useful.  
+  
+Cloud-optimised formats are typically paired with client libraries that hide the chunking and IO entirely, so that data analysts can work with familiar n-dimensional array abstractions in their notebooks rather than managing parallel HTTP requests by hand.  
   
 > [!NOTE]  
 > **Why chunking?**  
@@ -196,18 +236,6 @@ The disadvantage of object storage is that it has comparatively high latency. Le
 > * *Storage Efficiency* — Chunks can be compressed individually.  
 > * *Streaming & Access* — Chunks allow partial reads of a dataset; most applications don’t need everything.  
 >  
-  
-Cloud-optimzed implies choosing or assigning resources for workloads and applications to improve performance while remaining cost effective. Cloud-optimized formats are designed for object storage with HTTP (range) requests enabling high throughput (i.e., lots of reads) yet mitigating the (comparatively) high object read latency.  
-  
-The key characteristics of a cloud-optimized format are:  
-* Resources are described independently of their underlying storage structures. For example, a single parameter representing an entire weather prediction model run could be a single resource, meaning that the output of entire weather prediction model runs would be presented as a few resources rather than thousands of small files. 
-* Minimize the number of reads needed to determine location of the bytes you need (i.e., package metadata together to make it easy to access).  
-* Store data as small addressable chunks (files, tiles, or both) which enables data reads to be parallelised into many small requests.   
-* Hide the chunking complexity from the user – now the chunking doesn’t have to be a compromise of read-performance (which favours many small-sized chunks) vs. file-management (where fewer, larger chunks are better because of the overhead for users working with them).  
-* Offer lazy-loading – where the metadata is used to build an “empty” data structure in memory (a “virtual hypercube” so to speak), then applications execute parallel reads to get only the bytes needed to populate the parts of the hypercube that are used in calculations.  
-* Support HTTP range-requests – further reducing the number of bytes that need to be read by the application.  
-  
-Cloud-optimized formats are usually complemented by software libraries that make application development and data analysis simpler. The libraries do the heavy lifting like figuring out which chunk to read and populating the hypercube. This means that data analysts can concentrate on algorithms not scaffolding in their jupyter notebooks.  
   
 > [!NOTE]  
 > **Chunking complexity**  
@@ -219,55 +247,92 @@ Cloud-optimized formats are usually complemented by software libraries that make
 > *Detailed guidance on chunking strategies is beyond the scope of this report.*   
 >  
   
-Cloud-optimzed formats are available for point data, vector data, rasters, n-dimensional arrays (datacube/==hypercube==), and point clouds. For more information see the Cloud-Optimized Geospatial Formats Overview [^8] from the Cloud-Native Geospatial Forum (CNG).  
+The cost of approach (1) is that the data has to be (re)written into the cloud-optimised format, and a given chunking is only optimal for a particular direction of access (for example, geospatial vs. time-series). Where users want to query the same underlying data along very different axes, multiple chunked copies may be required. For high-volume primary archives, this cost is significant and can dominate the storage budget.  
   
-#### A focus on weather prediction model output  
+Cloud-optimised formats also tend to assume elastic, non-shared storage that can scale on demand. They typically have no native notion of queueing, throttling or quality-of-service, which can become a problem when serving popular data to a large user base from finite infrastructure.  
   
-For weather prediction model output, Zarr [^9] is a good fit. Zarr is used for storage of large n-dimensional arrays (tensors) enabling efficient IO for parallel computing applications. Arrays of data are persisted as a Zarr store where they are split into chunks stored as individual objects in a directory-like structure, and complemented with metadata describing content, shape, chunking and encoding of the arrays. Zarr has good support in terms of tooling. For example, Xarray (a python library) reads and writes Zarr directly and supports lazy-loading.  
+Cloud-optimised formats are available for point data, vector data, rasters, n-dimensional arrays (datacube / ==hypercube==), and point clouds. For more information see the Cloud-Optimized Geospatial Formats Overview [^8] from the Cloud-Native Geospatial Forum (CNG).  
   
-Although Zarr does have a native binary format, you don’t have to abandon your legacy formats (GRIB, NetCDF). This is important where you have long-term archives that would be time consuming and expensive to re-write or, as in the World Weather Watch, a large community of users who rely on continued provision of GRIB.   
+##### Feature extraction over native data  
   
-VirtualiZarr [^10] and its precursor Kerchunk [^11] create “virtual” Zarr datacubes by indexing legacy formats like netCDF, HDF5 and GRIB, even when those legacy files are compressed. The “virtual” Zarr provides an abstraction layer that enables the legacy files to be treated like a cloud-optimised resource with only minimal overhead. Such an approach would enable both cloud-optimized and legacy workflows to be supported in parallel, albeit with the cost of generating the indexes.  
+Where the primary data is held in a high-volume archive (for example, a multi-petabyte store of GRIB messages), rewriting it into a cloud-optimised format may be infeasible or undesirable. An alternative is to keep the data in its native layout and provide a service that performs cloud-optimised access on the user's behalf.  
   
-ECMWF implement a similar pattern using a different technology stack. Their Polytope [^12] open source library provides an API for extracting complex data from datacubes. It enables any arbitrary n-dimensional polygon (called a polytope) to be extracted from a datacube, allowing for efficient extraction of complex features, such as polygon regions or spatio-temporal paths. Polytope extends different datacube backends: XArray data-arrays and FDB object stores. earthkit [^13], another open source library, complements Polytope with powerful tools for speeding up weather and climate science workflows.  
+Such a service accepts a high-level request describing the feature the user wants — a region, a polygon, a vertical profile, a spatio-temporal trajectory, a time-series at a point — and returns only the bytes corresponding to that feature, packaged in a streamable response format (for example, OGC CoverageJSON). Internally, the service uses indices over the native archive to identify which fields and which byte-ranges within those fields are required, and reads only those bytes. Compressed primary data can be supported provided the compression scheme allows partial decoding.  
   
-Polytope and earthkit can be used to work directly with Zarr stores — or anything that can be loaded into Xarray. However, they recognise the need for high-performance data queries to support their Members.   
+This approach delivers the cloud-optimised access properties listed above without producing additional copies of the underlying data. It also lends itself naturally to quality-of-service: because every request is mediated by a server, the operator can apply queueing, throttling, authentication and metering. The cost is that the service must understand the structure of the primary archive, and is therefore tightly coupled to it.  
   
-ECMWF have deployed an *instance* of Polytope as a service on their high-performance computing environment, accessible only to ECMWF Member and Cooperating States. This instance is deployed over their FDB (Fields DataBase) — a custom object store developed at ECMWF for storing, indexing and retrieving GRIB data. Within FDB, each GRIB message is stored as a field and indexed through semantic metadata (i.e. physical variables such as temperature, pressure, ...). A set of fields is selected by specifying a request using a specific language developed for accessing [MARS Archive](https://github.com/ecmwf/fdb/blob/develop). [GribJump](https://github.com/ecmwf/gribjump), a C++ library, is used to determine the byte-ranges of the parts of the GRIB fields that are needed, then extracts the data for use within an application.   
+For meteorological datacubes, this can deliver substantial savings even compared with bounding-box requests on a chunked store: only the bytes that intersect the requested feature are read from the underlying IO system.  
   
-This mirrors the function of virtual Zarr: (1) find the fields using metadata; (2) foreach field, use the indexes to determine where the data is stored; (3) extract the necessary bytes (e.g., into an Xarray object).    
+##### Virtual cloud-optimised views  
   
-Because many users (particularly AI model developers) like a Zarr interface, ECMWF have developed Zarr-FDB (zfdb) [^14] as a prototype — providing a Zarr store with virtual views directly from a FDB instance, thereby enabling users to access GRIB as if it were a native Zarr dataset. Unlike VirtualiZarr or Kerchunk, Zarr-FDB uses the domain-specific MARS language to define virtual Zarr stores. The virtual Zarr stores support lazy-loading; bytes are only extracted from FDB as they are requested.  
+A third approach is to present a cloud-optimised interface — for example, a Zarr-compatible store — that is not backed by a real chunked copy of the data but is instead dynamically synthesised from the primary archive. Client applications interact with it exactly as they would with a native cloud-optimised format; under the covers, each chunk read is translated into the appropriate read against the underlying archive.  
   
-The Zarr store, with its JSON-encoded metadata, functions much like an API providing a description of the datacube irrespective of the technology with which it is stored or how it is encoded.     
+Two variants are common:  
+  
+* *Static virtual stores* — a one-off indexing pass over the legacy files produces a manifest mapping logical chunks to byte-ranges in the original objects. The manifest itself is small and cheap to host. Clients read it like a normal cloud-optimised dataset, while the actual bytes are streamed from the original files. Tools such as Kerchunk and VirtualiZarr implement this pattern over formats including netCDF, HDF5 and GRIB.  
+* *Dynamic virtual stores* — the cloud-optimised view is generated on demand from a live archive, with no pre-built manifest. The client requests a chunk; the service queries its primary archive, identifies the corresponding fields and byte-ranges, and returns the chunk as if it had always existed. This allows a single archive to be presented under many different chunkings without storing any of them.  
+  
+Virtual stores combine the familiar client-side API of cloud-optimised formats with the no-copy property of feature-extraction services. They inherit the strengths of both — and some of the limitations: the underlying archive still needs an index that supports byte-range extraction, and dynamic virtual stores in particular still depend on a service to mediate requests.  
+  
+#### Choosing among the approaches  
+  
+The three approaches are complementary, not alternatives. A typical publisher of a high-volume archive will use a mix:  
+  
+* For "hot" data with a clear dominant access pattern (for example, point time-series for climate analysis, or dense datacubes for ML training), a *cloud-optimised format* copy gives the best raw performance and offloads serving cost from the primary archive. The data can always be rebuilt from the primary if the chunked copy is lost or corrupted, and storage of the copy can be isolated from time-critical primary storage.  
+* For arbitrary, ad-hoc access across the full archive — especially extraction of features such as regions, profiles or trajectories — *feature extraction over native data* avoids producing one chunked copy per access pattern, and gives the operator natural levers for QoS over a shared resource.  
+* For users who specifically want a cloud-optimised client API but where pre-materialising a chunked copy is not viable, *virtual cloud-optimised views* let the same primary archive be presented under whatever chunking the user asks for, on demand.  
+  
+In practice, well-designed ARCO offerings publish a small number of high-value chunked copies, expose the rest of the archive via feature extraction, and use virtual views to bridge the two — unified through standard catalogues and APIs (STAC, OGC, WMO, CF) so that consumers see one coherent ARCO offering rather than a set of disconnected services.  
   
 #### Implementation evidence  
   
-##### ECMWF Polytope  
+The examples below are grouped by the three approaches.  
   
-ECMWF produces around 120 TiB of raw weather data each day, represented as a six-dimensional dataset. As the resolution of ECMWF's global weather models increases, the amount of raw data produced per day will increase into the petabytes, making the distribution of products and archived data impossible without in-situ, on-the-fly data extraction and processing.  
+##### Cloud-optimised formats  
   
-Polytope is a data extraction service developed by ECMWF that provides both access to full field global data and feature extraction capabilities. It uses concepts of computational geometry to extract n-dimensional polygons (also known as polytopes) from datacubes.  
+###### Zarr  
   
-Polytope is deployed as a user-facing service over ECMWF’s petabyte-scale Fields DataBase (FDB) and Destination Earth data stored in a distributed network of data bridges located at EuroHPC sites where digital twin simulations are run. The polytope hosted service is very fast: A timeseries request for 1 location from a 50-member ensemble returns a 10KB extract from an 80TB dataset in 10-seconds.  
+Zarr [^9] is the de facto cloud-native storage format for chunked n-dimensional arrays in the geoscience community. Arrays are persisted as a Zarr store where data is split into chunks stored as individual objects in a directory-like structure, complemented with metadata describing content, shape, chunking and encoding. Zarr is well-supported by client tooling: for example, Xarray reads and writes Zarr directly and supports lazy-loading. Several extensions and complementary specifications (notably GeoZarr) address Zarr's relatively weak built-in metadata model for geospatial data.  
+  
+###### Google ARCO-ERA5  
+  
+A canonical example of a cloud-optimised format copy of a high-value dataset is the Analysis-Ready, Cloud-Optimized ERA5 dataset, hosted by Google as a public dataset on Google Cloud Storage. The underlying ERA5 reanalysis is distributed in GRIB and netCDF; for ARCO-ERA5, a subset has been re-encoded and re-chunked into Zarr stores that are directly loadable by Xarray over HTTP. The Zarr layout is chosen to favour the intended workloads (in particular ML training and time-series analysis at points). The original ERA5 data continues to be distributed in its native formats; the Zarr copy is an additional, purpose-built ARCO surface over it. [https://console.cloud.google.com/marketplace/product/bigquery-public-data/arco-era5](https://console.cloud.google.com/marketplace/product/bigquery-public-data/arco-era5)  
+  
+###### Environment and Climate Change Canada / Met Service Canada Virtual Optimal Forecast (VOF) over Zarr  
+As part of their next generation forecasting data dissemination, MSC are using cloud-optimised data stores (Zarr hosted on OpenShift private cloud infrastructure) to serve all visualisations for the ECCC public website. Data from nowcast (0-6h), deterministic hi-res (6-48h), and  global (48h+) is stitched together to create a single “virtual” forecast and exposed through OGC API services using pygeoapi. To manage load on the private cloud infrastructure, the OGC API services and Zarr stores are not publicly accessible; the data may only be accessed via the public website.  
+  
+##### Feature extraction over native data  
+  
+###### ECMWF Polytope  
+  
+Polytope [^12] is a data extraction service that provides both access to full-field global data and feature extraction capabilities. It uses concepts of computational geometry to extract n-dimensional polygons (also known as polytopes) from datacubes, returning the result in OGC CoverageJSON.  
+  
+Polytope is deployed by ECMWF as a user-facing service over its petabyte-scale Fields DataBase (FDB) and over Destination Earth data stored in a distributed network of data bridges located at EuroHPC sites where digital twin simulations are run. The hosted service is fast: a time-series request for one location from a 50-member ensemble returns a 10 kB extract from an 80 TB dataset in around 10 seconds.  
+  
+ECMWF produces around 120 TiB of raw weather data each day, represented as a six-dimensional dataset. As model resolutions increase, daily production will rise into the petabytes — making distribution of full products and archived data impossible without in-situ, on-the-fly extraction of the kind Polytope provides.  
   
 The core Polytope library and the client are both open source under the Apache 2.0 licence and available on GitHub at [ecmwf/polytope](https://github.com/ecmwf/polytope) and [ecmwf/polytope-client](https://github.com/ecmwf/polytope-client).  
   
-##### ECMWF ZFDB  
-[Partly Cloudy with a Chance of Zarr — A virtualised approach to Zarr stores from ECMWF’s Fields Database, FOSDEM 2026](https://fosdem.org/2026/events/attachments/YNQRA7-partly-cloudy-with-a-chance-of-zarr/slides/267412/fosdem_26_dccuy9k.pdf)   
+##### Virtual cloud-optimised views  
   
-ECMWF zfdb is an experimental open-source Python library that implements a Zarr store using ECMWF's Fields DataBase (FDB) as its backend, allowing users to access GRIB meteorological data stored in the FDB as if it were a native Zarr dataset. Rather than converting or duplicating data into a new format, zfdb creates virtual Zarr v3 views by translating Zarr access patterns into MARS language requests — the same domain-specific vocabulary used to query ECMWF's meteorological archive — and leveraging the FDB's efficient indexing of GRIB fields by semantic metadata such as parameter, level, date, and step. Unlike related virtualisation approaches such as VirtualiZarr or Kerchunk, which operate on static file references, zfdb is dynamic: views are defined programmatically using MARS keywords and chunked along temporal or step axes, enabling integration with standard Python scientific tools such as xarray and zarr. Developed as part of the WarmWorld Easier project — which aims to improve interoperability of climate and weather data across European HPC centres — the library is currently described as an experiment rather than a production system, but represents a significant step toward bridging ECMWF's established GRIB-based data infrastructure with the cloud-native Zarr ecosystem increasingly adopted for machine learning and big-data analytics workflows.  
+###### VirtualiZarr and Kerchunk  
   
-##### Environment and Climate Change Canada / Met Service Canada Virtual Optimal Forecast (VOF) over Zarr  
-As part of their next generation forecasting data dissemination, MSC are using cloud-optimised data stores (Zarr hosted on OpenShift private cloud infrastructure) to serve all visualisations for the ECCC public website. Data from nowcast (0-6h), deterministic hi-res (6-48h), and  global (48h+) is stitched together to create a single “virtual” forecast and exposed through OGC API services using pygeoapi. To manage load on the private cloud infrastructure, the OGC API services and Zarr stores are not publicly accessible; the data may only be accessed via the public website.   
+VirtualiZarr [^10] and its precursor Kerchunk [^11] are reference implementations of static virtual Zarr stores. They scan legacy files (netCDF, HDF5, GRIB — including compressed variants) and produce a manifest describing where each logical chunk lives as a byte-range within the original files. Clients then open the manifest as a normal Zarr dataset; the actual bytes are read from the legacy objects. This allows existing archives to be exposed as cloud-optimised resources in parallel with their continued use in legacy workflows, at the cost of generating and maintaining the indices.  
   
-##### NASA evaluation of Earthmover Icechunk  
+###### NASA evaluation of Earthmover Icechunk  
 [Solving NASA’s Cloud Data Dilemma: How Icechunk Revolutionises Earth Data Access](https://www.earthmover.io/blog/nasa-icechunk/)  
 NASA has been migrating over 100 petabytes of data from on-premises systems to the cloud over several years, with the volume expected to surpass 320 petabytes by 2030. The vast majority is multidimensional scientific data stored in archival formats like NetCDF and HDF.  
   
 NASA partnered with Earthmover and Development Seed to pilot an approach based on Earthmover's open-source Icechunk tensor storage engine. The pilot applied Icechunk to the GPM IMERG precipitation dataset stored in S3, enabling high-performance cloud-native access without transforming the data to a new format. Icechunk's virtualization capabilities were used to present the entire collection of over a million files as a single analysis-ready Zarr data cube. VirtualiZarr was used to scan the files, producing an index describing the precise location of every chunk of data within each file, and these "chunk manifests" were stored in Icechunk's optimised format.  
   
 This approach enabled a 100x speedup for extracting time series data compared to existing approaches, while also simplifying the end-user experience. The implications are significant when scaled to NASA's 300 PB archive — duplicating archival files into a cloud-native format would effectively double storage costs, while the Icechunk approach can deliver tens of millions of dollars of savings in storage costs alone.  
+  
+###### ECMWF zfdb  
+  
+[Partly Cloudy with a Chance of Zarr — A virtualised approach to Zarr stores from ECMWF's Fields Database, FOSDEM 2026](https://fosdem.org/2026/events/attachments/YNQRA7-partly-cloudy-with-a-chance-of-zarr/slides/267412/fosdem_26_dccuy9k.pdf)  
+  
+zfdb [^14] is an experimental open-source Python library that implements a Zarr store using ECMWF's Fields DataBase (FDB) as its backend, allowing users to access GRIB meteorological data stored in the FDB as if it were a native Zarr dataset. Rather than converting or duplicating data, zfdb creates virtual Zarr v3 views by translating Zarr access patterns into MARS-language requests — the same domain-specific vocabulary used to query ECMWF's meteorological archive — and leveraging the FDB's indexing of GRIB fields by semantic metadata such as parameter, level, date, and step. Unlike VirtualiZarr or Kerchunk, which operate on static file references, zfdb is dynamic: views are defined programmatically using MARS keywords and chunked along temporal or step axes, enabling integration with standard Python scientific tools such as xarray and zarr. Developed as part of the WarmWorld Easier project — which aims to improve interoperability of climate and weather data across European HPC centres — the library is described as experimental rather than a production system, but represents a significant step toward bridging GRIB-based data infrastructure with the cloud-native Zarr ecosystem increasingly adopted for machine learning and big-data analytics workflows.  
+  
   
 ### Testbed  
   
