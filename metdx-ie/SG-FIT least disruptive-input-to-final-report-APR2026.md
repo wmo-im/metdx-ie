@@ -18,7 +18,7 @@ The challenges with large data volumes are threefold:
 2. Even if one could move large volume data, many users lack the necessary local capacity and capability to manage a copy of the data.   
 3. And finally, it’s much harder to confirm the authenticity and veracity of datasets when working with copies (e.g., they may have been subject to local modification).   
   
-ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. Version is 5 is 5PB. Version 6 is predicted to be 30Pb. What do you do with several petabytes when it’s downloaded?  
+ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. Version is 5 is 5 petabytes. Version 6 is predicted to be significantly bigger. What do you do with several petabytes when it’s downloaded?  
    
 Strategies for better (more effective) data sharing:  
 1. Let users download only the data they need (Web-based data APIs);  
@@ -200,8 +200,7 @@ The disadvantage of object storage is that it has comparatively high latency. Le
 Cloud-optimzed implies choosing or assigning resources for workloads and applications to improve performance while remaining cost effective. Cloud-optimized formats are designed for object storage with HTTP (range) requests enabling high throughput (i.e., lots of reads) yet mitigating the (comparatively) high object read latency.  
   
 The key characteristics of a cloud-optimized format are:  
-* Treat the whole dataset as a single resource (i.e., an entire weather prediction model run “==hypercube== “ is presented as an addressable object).
-* Resources are described independently of their underlying storage structures; for example, a single parameter representing an entire weather prediction model run.
+* Resources are described independently of their underlying storage structures. For example, a single parameter representing an entire weather prediction model run could be a single resource, meaning that the output of entire weather prediction model runs would be presented as a few resources rather than thousands of small files. 
 * Minimize the number of reads needed to determine location of the bytes you need (i.e., package metadata together to make it easy to access).  
 * Store data as small addressable chunks (files, tiles, or both) which enables data reads to be parallelised into many small requests.   
 * Hide the chunking complexity from the user – now the chunking doesn’t have to be a compromise of read-performance (which favours many small-sized chunks) vs. file-management (where fewer, larger chunks are better because of the overhead for users working with them).  
