@@ -44,6 +44,38 @@ There is no standard definition for “Cloud” or some of the other related ter
 * **Unified access to metered services** — There are a common set of credentials for accessing all the services available to a user (one login), and the usage of those services can be monitored in near-real-time as a usage-based metered services.  
   
 [**Cloud-native**: Cloud-native means that applications are built to exploit the cloud’s elasticity, automation, and distributed nature—not just hosted on virtual machines.]  
+
+### Objects not files  
+  
+Three storage interfaces are in common use today, each presenting a different model to applications:
+
+1. Block stores expose storage as a flat array of fixed-size blocks, addressed by number — the lowest-level interface, usually chosen for raw IO performance.
+2. Filesystems present a hierarchical namespace of named files with POSIX-style read/write/seek semantics — the dominant interface for general-purpose software.
+3. Object stores present a flat keyspace of blobs with rich metadata — designed around large, network-distributed data.
+
+These interfaces are usually layered. ECMWF's exabyte-scale MARS archive, for example, exposes meteorological data as an object store while using filesystems and block storage underneath. For meteorological data at this scale, the object-store abstraction has proven the right choice. Modern cloud-native object stores make it easier than ever to deploy, abstracting both data access and service management, and complement elastic compute with equally elastic IO.
+  
+Cloud-native Object stores have the following characteristics:  
+* *Scalability* — Object stores are designed to scale horizontally to exabytes of data.  
+* *Durability and availability* — Data can be replicated across multiple (geographic) zones with very high reliability and durability with automated integrity checking (e.g., S3 provides “11-nines” durability).  
+* *Cost effective* — Service providers may offer tiered storage (e.g., hot, cool, archive) to optimise cost based on access patterns; essentially, this means offsetting costs by accepting slower read speeds.  
+* *Access via HTTP APIs* — Objects (and byte-ranges within objects) are accessed via RESTful APIs making them ideal for distributed processing, serverless workflows (e.g., Spark, Dask, ML pipelines).  
+* *Event-driven integration* — Support for triggers on object creation or modification which is useful for automating workflows.   
+  
+In summary, publishing data as objects enables cost effective yet massively parallel querying and near-infinite scaling of durable storage. Consequently, object storage is a great choice for publishing large data volumes to a big audience. Support for byte-range queries (i.e., requesting just a part, a range of bytes, from an object) means that data users can further reduce the volume of data downloaded.  
+
+[is this needed?]
+> [!NOTE]  
+> **Examples of Tiered Storage Classes**: AWS S3 storage classes [https://aws.amazon.com/s3/storage-classes/](https://aws.amazon.com/s3/storage-classes/)   
+> * S3 Standard: Hot tier for frequently accessed data. General purpose. Amazon S3 provides **99.999999999% durability** (often referred to as "11 nines") for objects stored in its standard storage classes.  
+> * S3 Intelligent-Tiering: Automatically moves objects between frequent and infrequent tiers. Unknown or changing access patterns.  
+> * S3 Express One Zone. High performance, single Availability Zone. Up to 10x data access speed compared to Standard.   
+> * S3 Glacier Instant Retrieval / Flexible Retrieval / Deep Archive: Cold storage for archival data. AWS lifecycle policies automate transitions between these classes. Offset cost against slower retrieval speed.  
+>
+
+#### Implementation Evidence  
+  
+[Annex 1](#annex-1.-meteorological-open-datasets-published-on-cloud-platforms) provides a list of open meteorological datasets that are published on cloud-platform object stores. This list is not intended to be exhaustive, only to illustrate that publishing data in this way is commonplace.  
   
 ### Proximate compute  
   
@@ -147,42 +179,6 @@ To support interoperable data exchange within WIS2, service profiles are require
 * STAC Index is a community maintained registry of STAC catalogues and APIs. The STAC index lists a large and growing number of catalogues spanning satellite imagery, climate data, Earth observation archives, and more — from providers including NASA, ESA/Copernicus, Microsoft Planetary Computer, USGS, and many others. [https://stacindex.org](https://stacindex.org/)  
 * Radiant Earth STAC Browser is a User Interface for browsing and searching STAC catalogues listed on the STAC Index. It is open source and hosted on GitHub by Radiant Earth. [https://radiantearth.github.io/stac-browser/](https://radiantearth.github.io/stac-browser/)   
 * DestinE Data Lake Harmonised Data Access (HDA) API provides a STAC interface for data discovery and access. [https://destine-data-lake-docs.data.destination-earth.eu/en/latest/dedl-discovery-and-data-access/Harmonized-Data-Access/API-Architecture/API-Architecture.html](https://destine-data-lake-docs.data.destination-earth.eu/en/latest/dedl-discovery-and-data-access/Harmonized-Data-Access/API-Architecture/API-Architecture.html)   
-  
-### Objects not files  
-
-[we edited this section to be a bit more accurate but now I'm wondering why we even talk about object stores. I don't think anything we are doing with OGC standards is particularly tied to object storage? Its obviously convenient and a good way to store data that we then serve with OGC APIs, but does it actually matter here?]
-  
-Three storage interfaces are in common use today, each presenting a different model to applications:
-
-1. Block stores expose storage as a flat array of fixed-size blocks, addressed by number — the lowest-level interface, usually chosen for raw IO performance.
-2. Filesystems present a hierarchical namespace of named files with POSIX-style read/write/seek semantics — the dominant interface for general-purpose software.
-3. Object stores present a flat keyspace of blobs with rich metadata — designed around large, network-distributed data.
-
-These interfaces are usually layered. ECMWF's exabyte-scale MARS archive, for example, exposes meteorological data as an object store while using filesystems and block storage underneath. For meteorological data at this scale, the object-store abstraction has proven the right choice. Modern cloud-native object stores make it easier than ever to deploy, abstracting both data access and service management, and complement elastic compute with equally elastic IO.
-  
-Cloud-native Object stores have the following characteristics:  
-* *Scalability* — Object stores are designed to scale horizontally to exabytes of data.  
-* *Durability and availability* — Data can be replicated across multiple (geographic) zones with very high reliability and durability with automated integrity checking (e.g., S3 provides “11-nines” durability).  
-* *Cost effective* — Service providers may offer tiered storage (e.g., hot, cool, archive) to optimise cost based on access patterns; essentially, this means offsetting costs by accepting slower read speeds.  
-* *Access via HTTP APIs* — Objects (and byte-ranges within objects) are accessed via RESTful APIs making them ideal for distributed processing, serverless workflows (e.g., Spark, Dask, ML pipelines).  
-* *Event-driven integration* — Support for triggers on object creation or modification which is useful for automating workflows.   
-  
-In summary, publishing data as objects enables cost effective yet massively parallel querying and near-infinite scaling of durable storage. Consequently, object storage is a great choice for publishing large data volumes to a big audience. Support for byte-range queries (i.e., requesting just a part, a range of bytes, from an object) means that data users can further reduce the volume of data downloaded.  
-
-
-
-[is this needed?]
-> [!NOTE]  
-> **Examples of Tiered Storage Classes**: AWS S3 storage classes [https://aws.amazon.com/s3/storage-classes/](https://aws.amazon.com/s3/storage-classes/)   
-> * S3 Standard: Hot tier for frequently accessed data. General purpose. Amazon S3 provides **99.999999999% durability** (often referred to as "11 nines") for objects stored in its standard storage classes.  
-> * S3 Intelligent-Tiering: Automatically moves objects between frequent and infrequent tiers. Unknown or changing access patterns.  
-> * S3 Express One Zone. High performance, single Availability Zone. Up to 10x data access speed compared to Standard.   
-> * S3 Glacier Instant Retrieval / Flexible Retrieval / Deep Archive: Cold storage for archival data. AWS lifecycle policies automate transitions between these classes. Offset cost against slower retrieval speed.  
->
-
-#### Implementation Evidence  
-  
-[Annex 1](#annex-1.-meteorological-open-datasets-published-on-cloud-platforms) provides a list of open meteorological datasets that are published on cloud-platform object stores. This list is not intended to be exhaustive, only to illustrate that publishing data in this way is commonplace.  
   
 ### Analysis-Ready, Cloud-Optimised (ARCO) data  
   
