@@ -11,19 +11,19 @@ In the weather and climate community, the existing data distribution model pushe
   
 Future Data Infrastructure: Don’t move (all) the data.  
   
-Data usage or data “processing” can take many forms – from computing pre-defined statistics, to retrieving a part (or sub-set) of a dataset, to rendering data as an image, or bespoke computing such as model training.   
+Data usage or data “processing” can take many forms – from computing pre-defined statistics, to retrieving a part (or sub-set) of a dataset, to rendering data as an image, or bespoke computing such as ML (machine-learning) model training.   
   
 The challenges with large data volumes are threefold:  
-1. Large data volumes are difficult, if not impossible, to move in a timely and cost-effective manner. This is often referred to as “data gravity”.  
-2. Even if one could move large volume data, many users lack the necessary local capacity and capability to manage a copy of the data.   
-3. And finally, it’s much harder to confirm the authenticity and veracity of datasets when working with copies (e.g., they may have been subject to local modification).   
+1. Large data volumes are difficult, if not impossible, to move in a timely and cost-effective manner, even over short distances. This is often referred to as “data gravity”.  
+2. Even if one could move a large volume of data, many users lack the necessary local capacity and capability to manage a copy of the data.   
+3. And finally, it is much harder to confirm the authenticity and veracity of datasets when working with copies (e.g., they may have been subject to local modification, whether deliberately or not).   
   
 ECMWF’s Re-analysis (ERA) dataset, the training data for most ML weather models, contains decades of simulated weather that’s fitted to real observations. ERA5 is 12 petabytes. Version 6 is predicted to be ~25 petabytes. What do you do with several petabytes even when it’s downloaded?  
    
 Strategies for better (more effective) data sharing:  
 1. Let users download only the data they need (Web-based data APIs);  
-2. Let users work with data in place (Cloud-hosted, cloud-optimised data and proximate compute);  
-3. Give users a latent representation of the data which is highly compressed (AI compression);  
+2. Let users work with data in place (Cloud-hosted, cloud-optimised data and proximate-compute);  
+3. Give users a latent [what do you mean by "latent"?] representation of the data which is highly compressed (AI compression);  
 4. Move data generation closer to the users (Machine Learning Weather Prediction - MLWP).  
   
 *In this work the non-technical foundations for data sharing, such as licensing, are out of scope.*  
@@ -41,7 +41,7 @@ There is no standard definition for “Cloud” or some of the other related ter
 * **Leverage pooled resources** — The services offered by the cloud provider share a pool of resources, such as processors or storage, which are opaque to the consumers. Actual location or specific identity are abstracted away from the consumer. Capacity management, pooling and time-sharing management are the responsibility of the cloud provider to assure the cloud services’ availability and reliability.  
 * **Rapid capacity elasticity** — The capacity of services can be expanded and decreased rapidly on-demand by the users, without the intervention of provider’s people. For example, additional processing power during peak periods of Web-site usage.  
 * **Support multiple sandboxed systems** — Systems operating on the cloud are securely independent and non-interfering even though they share a pooled resource base.  
-* **Unified access to metered services** — There are a common set of credentials for accessing all the services available to a user (one login), and the usage of those services can be monitored in near-real-time as a usage-based metered services  
+* **Unified access to metered services** — There are a common set of credentials for accessing all the services available to a user (one login), and the usage of those services can be monitored in near-real-time as a usage-based metered services.  
   
 [**Cloud-native**: Cloud-native means that applications are built to exploit the cloud’s elasticity, automation, and distributed nature—not just hosted on virtual machines.]  
   
@@ -53,7 +53,9 @@ Why does the computation need to happen so close to the data?
 * Processing data close to where it is stored will improve application performance.  
 * If we don’t move (all) the data – we need to compute where the data is published.  
   
-Compute in parallel, scale elastically. Self-service, on-demand, elastic provisioning means that:   
+### Compute in parallel, scale elastically. 
+
+Self-service, on-demand, elastic provisioning means that:   
 * You can meet demand from a large user-base; and  
 * Applications can turn a time-bound problem (1 core x 1000 seconds) into a resource-bound problem (1000 cores x 1 second).  
   
@@ -96,27 +98,26 @@ Since 2009, a Memorandum of Understanding (MoU) has been in place between the Op
 Consequently, [OGC APIs](https://ogcapi.ogc.org) are a good match for data-sharing needs within the meteorological community. The key benefits of OGC APIs are:  
   
 * *Developer accessibility* — OGC APIs use standard Web addresses and HTTP methods to interact with resources (i.e., REST conventions), and return JSON responses. A Web developer can consume geospatial data using the same tools and mental models they use for any other API, thus widening the pool of people who can work with geospatial data.  
-* *Discoverability & self-documentation* — Each OGC API exposes an OpenAPI document [^5], meaning services are machine-readable and can be explored via commons tools. You don't need specialist knowledge just to understand what a service offers.  
+* *Discoverability and self-documentation* — Each OGC API exposes an OpenAPI document [^5], meaning services are machine-readable and can be explored via commons tools. You do not need specialist knowledge just to understand what a service offers.  
 * *Modularity* — The suite of operations is realized by reusable building blocks: OGC API – Features, Tiles, Maps, Coverages, Processes, Records, and so on. Implementers adopt only the parts they need, rather than one monolithic standard.  
 * *Web-native interoperability* — Like WIS2, OGC APIs are Web-native, making deployment and scaling straightforward.  
   
-Data publishers have a standard way to expose geospatial datasets that modern consumers can actually use without friction. Application developers to integrate geospatial data without learning a new stack of GIS-specific tooling. Enterprises benefit from reduced vendor lock-in since the standards are open and broadly implemented.  
+Data publishers have a standard way to expose geospatial datasets that modern consumers can actually use without friction. Application developers can integrate geospatial data without learning a new stack of GIS-specific tooling. Enterprises benefit from reduced vendor lock-in since the standards are open and broadly implemented.  
   
 Three of the OGC APIs are particularly relevant:  
 1. *OGC API — Environmental Data Retrieval (EDR)* is a standard Web API specification that provides a simple, consistent way to query and retrieve subsets of environmental data — such as weather observations, forecasts, or climate data — from large datasets using spatial and temporal patterns like points, areas, or trajectories, without needing to download the entire dataset. The specification is published by the Open Geospatial Consortium and is available at [ogcapi.ogc.org/edr](https://ogcapi.ogc.org/edr).  
 2. *OGC API — Maps* is a standard Web API specification that allows clients to retrieve geo-referenced map images (rendered visual representations of spatial data) from a server by requesting a defined area, scale, and style over the web. The specification is published by the Open Geospatial Consortium and is available at [ogcapi.ogc.org/maps](https://ogcapi.ogc.org/maps).  
 3. *OGC API — Processes Part 1* is a standard web API specification that enables clients to discover, execute, and retrieve the results of geospatial processing operations hosted on a remote server — such as running a spatial analysis, a data transformation, or calculating summary statistics — using standard HTTP requests. The specification is published by the Open Geospatial Consortium and is available at [ogcapi.ogc.org/processes](https://ogcapi.ogc.org/processes).  
   
-OGC APIs require a server to interpret and execute requests from users. An advantage of this approach is that complex data storage is not exposed to the users; they only see how the service operator has chosen to organise the data for them. However, a server will consume compute resource - which may be non-trivial if serving popular data to a large community.   
+OGC APIs require a server to interpret and execute requests from users. An advantage of this approach is that complex data storage is not exposed to the users; they only see how the service operator has chosen to expose the data for them. However, a server will consume compute resource - which may be non-trivial if serving popular data to a large community.   
   
-Generally, Earth-system datasets are too big to publish as single resource: most data publishers provide datasets as sets of objects or files. In fact, this commonly used pattern is how WMO has been publishing data for decades (e.g., NWP model data as GRIB files). Rather than providing a server to interpret users’ requests, users can download the subset of objects or files that contain the data they need. The challenge is helping users determine which of the objects or files contain the data they need.  
+Generally, Earth-system datasets are too big to publish as single resource: most data publishers provide datasets as sets of objects or files. In fact, this commonly used pattern is how WMO has been publishing data for decades (e.g., NWP model data as GRIB files). Rather than providing a server to interpret users’ requests, users can download the subset of objects or files that contain the data that they need. The challenge is helping users determine which of the objects or files contain the data that they need.  
   
 ECMWF and NOAA recognise the problem and have independently adopted data models, tools and services which allow users to find the data they need. This is not standardised; ECMWF and NOAA use different tooling and formats.  
   
 A standardised approach is adopted by OGC providing a fourth, albeit slightly different, kind of Web API:
-<ol start="4">  
-<li>STAC — SpatioTemporal Asset Catalog is a community-driven suite of specifications that provides a common, JSON-based structure for describing and cataloguing geospatial assets — such as satellite imagery, aerial photography, or climate datasets — making them easily discoverable, searchable, and accessible on the web through a consistent set of metadata fields and links. Originating from the Earth observation community, STAC has been adopted by the OGC as a community standard, reflecting its broad uptake across government agencies, cloud providers, and the geospatial industry as a de facto approach to publishing and discovering spatio-temporal data at scale. The specification and further resources are available at <a href="https://stacspec.org/">stacspec.org</a>.</li>
-</ol>   
+  
+4. *STAC — SpatioTemporal Asset Catalog* is a community-driven suite of specifications that provides a common, JSON-based structure for describing and cataloguing geospatial assets — such as satellite imagery, aerial photography, or climate datasets — making them easily discoverable, searchable, and accessible on the web through a consistent set of metadata fields and links. Originating from the Earth Observation community, STAC has been adopted by the OGC as a Community Standard, reflecting its broad uptake across government agencies, cloud providers, and the geospatial industry as a de facto approach to publishing and discovering spatio-temporal data at scale. The specification and further resources are available at <a href="https://stacspec.org/">stacspec.org</a>.
   
 #### Profiles  
   
@@ -126,13 +127,13 @@ In a federated system comprising many data publishers and many data consumers, t
   
 Put another way, open standards are intentionally designed for flexibility, but that flexibility becomes a point of friction as deployments multiply.  
   
-Profiles — or more specifically, “restrictive profiles” — are a means to address this friction. A profile removes ambiguity by defining additional rules on top of a standard controlling how it should be implemented. A profile may define things like: use of optional query patterns, parameter naming conventions, required response formats, CRS support.   
+Profiles — or more specifically, “restrictive profiles” — are a means to address this friction. A profile removes ambiguity by defining additional rules on top of a standard, controlling how it should be implemented. A profile may define things like: use of optional query patterns, parameter naming conventions, required response formats, CRS (Coordinate Reference System) support.  
   
-Essentially, use of a profile means trading flexibility for predictability: services follow tightly specified rules, client applications will know what behaviour to expect from those services. A profiled service distributing a particular kind of data should be interoperable — interoperable in the sense that one client or library should be able to use EDR services from different projects and institutes to query data without having custom code or plugins for each service.  
+Essentially, use of a profile means trading flexibility for predictability: if services follow tightly specified rules, client applications will know what behaviour to expect from those services. A profiled service distributing a particular kind of data should be truly interoperable — interoperable in the sense that one client or library should be able to use EDR services from different projects and institutes to query data without having custom code or "plugins" for each service.  
   
-Profiling is a well-known pattern for interoperability. The approach is now being formalised in OGC API EDR Part 3: Service Profile Support [^6]. In Europe, EUMETNET is developing a profile for publishing meteorological data via OGC API EDR [^7] with the objective of harmonising data service provision across the 31 Member National Meteorological Services as part of its MeteoGate federated data platform.  
+Profiling is a well-known pattern for interoperability. The approach is now being formalised in OGC API-EDR Part 3: Service Profiles [^6]. In Europe, EUMETNET is developing a profile for publishing meteorological data via OGC API-EDR [^7] with the objective of harmonising data service provision across the 31 Member National Meteorological Services as part of its MeteoGate federated data platform.  
   
-To support interoperable data exchange within WIS2, service profiles are required for OGC API Maps, EDR, and Processes and for STAC for each type of data that is exchanged.  
+To support interoperable data exchange within WIS2, service profiles are required for OGC API-Maps, EDR, and Processes and for STAC for each type of data that is exchanged.  
   
 #### Implementation evidence  
   
@@ -161,7 +162,7 @@ These interfaces are usually layered. ECMWF's exabyte-scale MARS archive, for ex
   
 Cloud-native Object stores have the following characteristics:  
 * *Scalability* — Object stores are designed to scale horizontally to exabytes of data.  
-* *Durability and availability* — Data can be replicated across multiple (geographic) zones with very high durability and automated integrity checking (e.g., S3 provides “11-nines” durability).  
+* *Durability and availability* — Data can be replicated across multiple (geographic) zones with very high reliability and durability with automated integrity checking (e.g., S3 provides “11-nines” durability).  
 * *Cost effective* — Service providers may offer tiered storage (e.g., hot, cool, archive) to optimise cost based on access patterns; essentially, this means offsetting costs by accepting slower read speeds.  
 * *Access via HTTP APIs* — Objects (and byte-ranges within objects) are accessed via RESTful APIs making them ideal for distributed processing, serverless workflows (e.g., Spark, Dask, ML pipelines).  
 * *Event-driven integration* — Support for triggers on object creation or modification which is useful for automating workflows.   
@@ -179,10 +180,9 @@ In summary, publishing data as objects enables cost effective yet massively para
 > * S3 Glacier Instant Retrieval / Flexible Retrieval / Deep Archive: Cold storage for archival data. AWS lifecycle policies automate transitions between these classes. Offset cost against slower retrieval speed.  
 >
 
-  
 #### Implementation Evidence  
   
-[Annex 1](#annex-1.-meteorological-open-datasets-published-on-cloud-platforms) provides a list of open meteorological datasets that are published on cloud-platform object stores. This list is not intended to be exhaustive, only to illustrate that publishing data in this way is common place.  
+[Annex 1](#annex-1.-meteorological-open-datasets-published-on-cloud-platforms) provides a list of open meteorological datasets that are published on cloud-platform object stores. This list is not intended to be exhaustive, only to illustrate that publishing data in this way is commonplace.  
   
 ### Analysis-Ready, Cloud-Optimised (ARCO) data  
   
@@ -232,17 +232,17 @@ Cloud-optimised formats are typically paired with client libraries that hide the
 > [!NOTE]  
 > **Why chunking?**  
 > * *Scalability* — Chunking breaks large datasets into smaller, manageable pieces.  
-> * *Performance* — Only the needed chunks are read or processed, reducing memory and compute load, increasing application speed; smaller chunks can be read more quickly, avoiding contention on IO.  
+> * *Performance* — Only the required chunks are read or processed, reducing memory and compute load, increasing application speed; smaller chunks can be read more quickly, avoiding contention on I/O.  
 > * *Storage Efficiency* — Chunks can be compressed individually.  
 > * *Streaming & Access* — Chunks allow partial reads of a dataset; most applications don’t need everything.  
 >  
   
 > [!NOTE]  
 > **Chunking complexity**  
-> * Chunk-shape impacts read performance. for example, consider how many chunks need to be read for an area query vs time-series query where coverage data is chunked into 2-d (x,y) layers at a single timestep; the time-series read will have to open *many* chunks, each of which incurs latency  
-> * The objective of your chunking strategy should be to enable faster data retrievals by needing fewer object reads to access the bytes   
-> * You need to think about how your priority users want to query the data and chunk your data to suit – optimise for the main query pattern, if “outlier” queries take longer then so be it  
-> * Sometimes there’s no way to avoid supporting different query patterns – in which case you may need to persist the data twice with each copy chunked differently and exposed through a different end-point  
+> * Chunk-shape impacts read performance. For example, consider how many chunks need to be read for an area query vs time-series query where coverage data is chunked into 2D (.x,y) layers at a single timestep; the time-series read will have to open *many* chunks, each of which incurs latency
+> * The objective of a chunking strategy should be to enable faster data retrievals by needing fewer object reads to access the bytes.
+> * Data providers need to think about how their priority users want to query the data, and how chunk the data to suit them – optimise for the main query pattern, if “outlier” queries take longer, then so be it. 
+> * Sometimes there is no way to avoid supporting different query patterns – in which case the provider may need to persist the data twice with each copy chunked differently and exposed through a different end-point.  
 >   
 > *Detailed guidance on chunking strategies is beyond the scope of this report.*   
 >  
@@ -458,19 +458,19 @@ array([277.17514648, 276.23178711, 277.2572998 , 277.56884766,
   
 > [!NOTE]  
 > **Note on xarray operations:**  
-> * `open_dataset()` is the “Swiss Army knife” - but you need to tell it which dataset engine to use.  
+> * `open_dataset()` is the “Swiss Army knife” - but which dataset engine to use must be specified.  
 > * `open_zarr()` is a convenience wrapper that only works with Zarr.  
 > * `open-mfdataset()` opens multiple files and combines them into a single (in-memory) virtual datacube.  
 >   
   
-OCG API Maps profile:  
+OCG API-Maps profile:  
 * [GitHub](https://github.com/opengeospatial/metocean-ogcapi-maps-profile), [draft spec](https://docs.ogc.org/DRAFTS/26-002.html)  
 * Collection instance: single model run, all parameters with consistent domain (note: models output data on several vertical reference systems — pressure levels, surface, whole-earth, etc.; consequently a model run may map to several Collections).  
 * Extend Maps to add custom parameter-name queryable (Maps operation is tied to Collection; a collection will likely include many parameters; we need to instruct the Map service which parameter to visualise). (discussion: [Issue opengeospatial/ogcapi-maps#142](https://github.com/opengeospatial/ogcapi-maps/issues/142)).  
 * Use subset queryable for subsetting on enumerated dimensions (e.g., pressure level, ensemble member).  
 * Dimensions and parameter names defined in the `/collections/{collection-id}/schema` endpoint (see [OGC API - Common - Part 3: Common: Schemas](https://docs.ogc.org/DRAFTS/23-058r1.html)).  
 * Servers shall not interpolate between enumerated dimensions (instance, time-step, vertical level). On error, return a list of the valid values for the dimension.  
-* Servers shall return a 2-d image in horizontal x-y plane (more sophisticated cases may be added in future, e.g., vertical slices, Hovmöller diagram). If the query isn’t constrained (e.g., z dimension is not specified) the server will choose how to reduce the data to a 2-d horizontal plane. This ensures that standard ogcapi-maps queries will work, albeit with limited dimensionality.  
+* Servers shall return a 2-d image in horizontal x-y plane (more sophisticated cases may be added in future, e.g., vertical slices, Hovmöller diagram). If the query is not constrained (e.g., z dimension is not specified) the server will choose how to reduce the data to a 2-d horizontal plane. This ensures that standard ogcapi-maps queries will work, albeit with limited dimensionality.  
   
 Example maps query:  
 ```
@@ -549,10 +549,10 @@ Web-based UI:
   
 ### Future Work  
   
-The Least Disruptive work-stream of the Study Group has identified several elements that could be incorporated into WMO Technical Regulation. During the next intercessional period (2027-2028), the Standing Committee on Information Management and Technology (SC-IMT) is expected to pursue the following objectives under the work item “WIS 2.0 Evolution in Support of the Future Data Infrastructure and AI applications”:  
+The Least Disruptive work-stream of the Study Group has identified several elements that could be incorporated into WMO Technical Regulations. During the next intercessional period (2027-2028), the Standing Committee on Information Management and Technology (SC-IMT) is expected to pursue the following objectives under the work item “WIS 2.0 Evolution in Support of the Future Data Infrastructure and AI applications”:  
   
 1. Develop a standard framework for the use of Web-based data APIs in WIS2.  
-2. Collaborate with the OGC MetOcean Domain Working Group to develop OGC-API profiles and reference implementations for the use of OGC API Maps ([GitHub](https://github.com/opengeospatial/metocean-ogcapi-maps-profile), [draft spec](https://docs.ogc.org/DRAFTS/26-002.html)), EDR ([GitHub](https://github.com/EUMETNET/metocean-edr-profile), [draft spec](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html) ==pending merge of [PR#75](https://github.com/EUMETNET/metocean-edr-profile/pull/75)==), and Processes (Part 1) in the WMO context.  
+2. Collaborate with the OGC MetOcean Domain Working Group to develop OGC API profiles and reference implementations for the use of OGC API-Maps ([GitHub](https://github.com/opengeospatial/metocean-ogcapi-maps-profile), [draft spec](https://docs.ogc.org/DRAFTS/26-002.html)), EDR ([GitHub](https://github.com/EUMETNET/metocean-edr-profile), [draft spec](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html) ==pending merge of [PR#75](https://github.com/EUMETNET/metocean-edr-profile/pull/75)==), and Processes (Part 1) in the WMO context.  
 3. Develop a standard, technology-agnostic mechanism for describing n-dimensional array datasets (i.e., ==hypercubes==) plus reference implementations.  
 4. Develop guidance for provision of “==Analysis-Ready==, Cloud-Optimized” (ARCO) weather and climate data that is ready for use with AI applications.  
 5. Develop guidance for the use of STAC to describe weather and climate datasets.   
