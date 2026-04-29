@@ -282,7 +282,7 @@ The three approaches are complementary, not alternatives. A typical publisher of
 * For arbitrary, ad-hoc access across the full archive — especially extraction of features such as regions, profiles or trajectories — *feature extraction over native data* avoids producing one chunked copy per access pattern, and gives the operator natural levers for QoS over a shared resource.  
 * For users who specifically want a cloud-optimised client API but where pre-materialising a chunked copy is not viable, *virtual cloud-optimised views* let the same primary archive be presented under whatever chunking the user asks for, on demand.  
   
-In practice, well-designed ARCO offerings publish a small number of high-value chunked copies, expose the rest of the archive via feature extraction, and use virtual views to bridge the two — unified through standard catalogues and APIs (STAC, OGC, WMO, CF) so that consumers see one coherent ARCO offering rather than a set of disconnected services.  
+In practice, well-designed ARCO offerings may publish a small number of high-value chunked copies, expose data via feature extraction, or use virtual views — unified through standard catalogues and APIs (STAC, OGC, WMO, CF) so that consumers see one coherent ARCO offering.  
   
 #### Implementation evidence  
   
