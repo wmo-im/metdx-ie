@@ -139,13 +139,13 @@ To support interoperable data exchange within WIS2, service profiles are require
   
 * pygeoapi an open source Python server Reference Implementation of the suite of OGC APIs. pygeoapi is used extensively by numerous organizations (including Environment and Climate Change Canada and ECMWF).  ECCC's [MSC GeoMet API platform](https://eccc-msc.github.io/open-data/msc-geomet/readme_en) uses pygeoapi in 24/7 production to provide access to NWP, radar, alerts, archive climate and water data, real-time hydrometric data, and surface weather observations. [https://pygeoapi.io](https://pygeoapi.io)   
 * WIS2 in a box (wis2box) is a Reference Implementation of a WIS2 Node. It includes a dedicated wis2box-api component providing OGC APIs to discover, access, and visualise notifications, data collections, and configurations (datasets and stations). This implementation is powered by pygeoapi. [https://docs.wis2box.wis.wmo.int/](https://docs.wis2box.wis.wmo.int/)   
-* ECMWF Polytope is an open source library for extracting complex data from datacubes. Its API enables any arbitrary n-dimensional polygon (called a polytope) to be extracted from a datacube, allowing for efficient extraction of complex features, such as polygon regions or spatio-temporal paths. Like OGC API EDR, Polytope encodes data in CoverageJSON. Polytope also mirrors the query patterns of OGC API EDR: feature extraction allows users to request standard meteorological features such as time series, vertical profiles, and arbitrary polygons, retrieving only the data they need rather than downloading global fields. Polytope is a data service served by ECMWF for their operational data and Destination Earth data, but can also be used effectively as a backend to plugin to pygeoapi. [https://github.com/ecmwf/polytope](https://github.com/ecmwf/polytope)   
-* ECMWF earthkit is an open source library, providing powerful tools for speeding up weather and climate science workflows by simplifying data access, processing, analysis, visualisation and much more. earthkit-data module makes it easy for users to read, inspect, and slice data from a wide range of geospatial input types, with a dedicated component to handle CoverageJSON data served by the Polytope.  [https://github.com/ecmwf/earthkit](https://github.com/ecmwf/earthkit)  
-* EUMETNET MeteoGate is a federated data sharing platform developed and operated by EUMETNET that provides a unified technical infrastructure for the discovery and access of meteorological and hydrological data across Europe and beyond. MeteoGate enables European National Meteorological Services to openly share their data through a combination of an API Gateway, a Data Explorer for discovery and browsing, and integration with WIS2. The platform emerged from the EU- and EUMETNET-funded RODEO project and is designed to meet EU obligations under the Open Data Directive and the High Value Datasets regulation, bringing together data assets including land-based surface observations, weather radar composites, climate datasets, and severe weather warnings. OGC API EDR is the mandated standard for data access across MeteoGate, representing one of the most significant real-world deployments of OGC APIs in the European meteorological domain. Data access components within MeteoGate use OGC API EDR as the MeteoGate-compliant standard for providing interactive API access to datasets and collections. The E-SOH (EUMETNET Supplementary Observations Hub) operational system, run by DWD on the European Weather Cloud, uses the OGC API EDR interface for retrieving land-based surface observations. EUMETNET has further invested in the wider OGC API ecosystem by publishing a MetOcean profile of OGC API EDR, defining meteorological community conventions for parameter naming, response encoding using CoverageJSON, and coordinate reference systems. [https://meteogate.eu](https://meteogate.eu)   
-* FMI SmartMet Server demonstrates evidence for OGC API adoption at operational scale. SmartMet Server is a high-capacity, high-availability data and product server for MetOcean data, written in C++ and in continuous operational use at FMI since 2008, underpinning FMI's Open Data Portal since 2013. The platform follows a plugin-based architecture in which individual OGC API standards are implemented as discrete, interchangeable plugins. The server is published under the MIT licence and freely available on GitHub, meaning FMI's implementation has become a reusable reference platform that other National Meteorological Services can adopt. Notably, FMI's EDR API and Surface Observations API are cited directly in EUMETNET MeteoGate documentation as reference implementation examples for Data Publishers looking to understand how to publish data in a MeteoGate-compatible, OGC API EDR compliant setup. [https://github.com/fmidev/smartmet-server](https://github.com/fmidev/smartmet-server)    
-* The Danish Meteorological Institute (DMI) has made OGC API standards the foundation of its open data platform — notably OGC API Features for observation and climate data, and EDR for forecast data. For bulk forecast file access, DMI additionally offers a Forecast Data STAC API covering the same underlying data, giving users a choice between file-level discovery and download via STAC, or on-demand sub-selection via OGC API EDR depending on their use case. DMI’s open data platform is openly accessible without authentication as of December 2025. [https://www.dmi.dk/friedata/dokumentation/basics](https://www.dmi.dk/friedata/dokumentation/basics)  
+* ECMWF Polytope is an open source library for extracting complex data from datacubes. Its API enables any arbitrary n-dimensional polygon (called a polytope) to be extracted from a datacube, allowing for efficient extraction of complex features, such as polygon regions or spatio-temporal paths. Like OGC API-EDR, Polytope can encode data in CoverageJSON. Polytope also mirrors the query patterns of OGC API-EDR: feature extraction allows users to request standard meteorological features such as time series, vertical profiles, and arbitrary polygons, retrieving only the data they need rather than downloading global fields. Polytope is a data service served by ECMWF for their operational data and Destination Earth data, but can also be used effectively as a backend for an OGC API server such as pygeoapi. [https://github.com/ecmwf/polytope](https://github.com/ecmwf/polytope)   
+* ECMWF earthkit is an open source library, providing powerful tools for speeding up weather and climate science workflows by simplifying data access, processing, analysis, visualisation and much more. earthkit-data module makes it easy for users to read, inspect, and slice data from a wide range of geospatial input types, with a dedicated component to handle CoverageJSON data served by Polytope.  [https://github.com/ecmwf/earthkit](https://github.com/ecmwf/earthkit)  
+* EUMETNET MeteoGate is a federated data sharing platform developed and operated by EUMETNET that provides a unified technical infrastructure for the discovery and access of meteorological and hydrological data across Europe and beyond. MeteoGate enables European National Meteorological Services to openly share their data through a combination of an API Gateway, a Data Explorer for discovery and browsing, and integration with WIS2. The platform emerged from the EU- and EUMETNET-funded RODEO project and is designed to meet EU obligations under the Open Data Directive and the High Value Datasets regulation, bringing together data assets including land-based surface observations, weather radar composites, climate datasets, and severe weather warnings. OGC API-EDR is the mandated standard for data access across MeteoGate, representing one of the most significant real-world deployments of OGC APIs in the European meteorological domain. Data access components within MeteoGate use OGC API-EDR as the MeteoGate-compliant standard for providing interactive API access to datasets and collections. The E-SOH (EUMETNET Supplementary Observations Hub) operational system, run by DWD on the European Weather Cloud, uses the OGC API-EDR interface for retrieving land-based surface observations. EUMETNET has further invested in the wider OGC API ecosystem by publishing a MetOcean profile of OGC API-EDR, defining meteorological community conventions for parameter naming, response encoding using CoverageJSON, and coordinate reference systems. [https://meteogate.eu](https://meteogate.eu)   
+* FMI SmartMet Server demonstrates evidence for OGC API adoption at operational scale. SmartMet Server is a high-capacity, high-availability data and product server for MetOcean data, written in C++ and in continuous operational use at FMI since 2008, underpinning FMI's Open Data Portal since 2013. The platform follows a plugin-based architecture in which individual OGC API standards are implemented as discrete, interchangeable plugins. The server is published under the MIT licence and freely available on GitHub, meaning FMI's implementation has become a reusable reference platform that other National Meteorological Services can adopt. Notably, FMI's EDR API and Surface Observations API are cited directly in EUMETNET MeteoGate documentation as reference implementation examples for Data Publishers looking to understand how to publish data in a MeteoGate-compatible, OGC API-EDR compliant setup. [https://github.com/fmidev/smartmet-server](https://github.com/fmidev/smartmet-server)    
+* The Danish Meteorological Institute (DMI) has made OGC API standards the foundation of its open data platform — notably OGC API Features for observation and climate data, and OGC API-EDR for forecast data. For bulk forecast file access, DMI additionally offers a Forecast Data STAC API covering the same underlying data, giving users a choice between file-level discovery and download via STAC, or on-demand sub-selection via OGC API-EDR depending on their use case. DMI’s open data platform is openly accessible without authentication as of December 2025. [https://www.dmi.dk/friedata/dokumentation/basics](https://www.dmi.dk/friedata/dokumentation/basics)  
 * STAC Index is a community maintained registry of STAC catalogues and APIs. The STAC index lists a large and growing number of catalogues spanning satellite imagery, climate data, Earth observation archives, and more — from providers including NASA, ESA/Copernicus, Microsoft Planetary Computer, USGS, and many others. [https://stacindex.org](https://stacindex.org/)  
-* Radiant Earth STAC Browser is a UI for browsing and searching STAC catalogues listed on the STAC Index. It is open source and hosted on GitHub by Radiant Earth. [https://radiantearth.github.io/stac-browser/](https://radiantearth.github.io/stac-browser/)   
+* Radiant Earth STAC Browser is a User Interface for browsing and searching STAC catalogues listed on the STAC Index. It is open source and hosted on GitHub by Radiant Earth. [https://radiantearth.github.io/stac-browser/](https://radiantearth.github.io/stac-browser/)   
 * DestinE Data Lake Harmonised Data Access (HDA) API provides a STAC interface for data discovery and access. [https://destine-data-lake-docs.data.destination-earth.eu/en/latest/dedl-discovery-and-data-access/Harmonized-Data-Access/API-Architecture/API-Architecture.html](https://destine-data-lake-docs.data.destination-earth.eu/en/latest/dedl-discovery-and-data-access/Harmonized-Data-Access/API-Architecture/API-Architecture.html)   
   
 ### Objects not files  
@@ -186,7 +186,7 @@ In summary, publishing data as objects enables cost effective yet massively para
   
 ### Analysis-Ready, Cloud-Optimised (ARCO) data  
   
-Earth-system datasets are large, are growing, and are increasingly accessed by users and applications that have neither the capacity nor the desire to download them. Two related properties make a dataset useful in this setting:  
+Earth-system datasets are large, are growing, and are increasingly accessed by users and applications that have neither the capacity nor the desire to download those datasets. Two related properties make a dataset useful in this setting:  
   
 * *Analysis-Ready* — the data is directly usable for analysis without further transformation. It is findable, accessible, interoperable and reusable (FAIR), and the burden of preparation on the user is as low as practicable. What counts as "ready" is consumer-dependent: different analyses require different preprocessing, and a dataset that is analysis-ready for one community may not be for another.  
 * *Cloud-Optimised* — access to the data is optimised for minimal data transfer and minimal cost. Reading is stateless or streamed, does not depend on the user's local filesystem, and allows selective access to discrete segments of the underlying data without retrieving the whole.  
@@ -200,7 +200,7 @@ Cloud-optimised access has a small set of characteristic properties, regardless 
 * *Selective access to discrete segments* — clients can fetch arbitrary subsets (a region, a time-series at a point, a single parameter at a single step) without reading the whole dataset.  
 * *Stateless or streaming reads* — access works over standard HTTP, with no dependence on the client's local filesystem and no large local working copy.  
 * *Minimised data transfer* — the bytes returned are close to the bytes the analysis actually needs; metadata and indices are arranged so that the number of reads required to locate and fetch those bytes is small.  
-* *Parallelisable* — many small requests can be issued in parallel, allowing applications to turn a time-bound problem into a resource-bound one (see *Proximate compute*, above).  
+* *Parallelisable* — many small requests can be issued in parallel, allowing applications to turn a time-bound problem into a resource-bound one (see [Proximate compute](#proximate-compute), above).  
 * *Lazy materialisation* — the dataset is described to the client as a logical n-dimensional structure (a ==hypercube==); concrete bytes are fetched only as the application reads from regions of that structure.  
 * *Decoupled from primary storage layout* — the access path is described independently of the underlying storage structure, so the same logical view can be served from different physical layouts, or from copies tuned for different access patterns.  
   
@@ -212,7 +212,7 @@ Three complementary approaches have emerged in the weather and climate community
   
 1. *Cloud-optimised formats* — write (or rewrite) the data into a chunked, compressed format that is itself designed to be served over HTTP. Each chunk can be fetched independently. This gives the best raw read performance for the chunking dimensions chosen, at the cost of an extra copy of the data.  
 2. *Feature extraction over native data* — keep the data in its primary archive format and provide a service that, given a high-level request (a region, a trajectory, a time-series), jumps to and returns only the relevant bytes. This avoids copies but requires a server with knowledge of the underlying data layout.  
-3. *Virtual cloud-optimised views* — present a cloud-optimised interface (for example a Zarr-shaped API) that is dynamically backed by the primary archive, with no data duplication. This combines the familiar client-side API of approach (1) with the no-copy property of approach (2).  
+3. *Virtual cloud-optimised views* — present a cloud-optimised interface (for example, a Zarr-shaped API) that is dynamically backed by the primary archive, with no data duplication. This combines the familiar client-side API of approach (1) with the no-copy property of approach (2).  
   
 ##### Cloud-optimised formats  
   
@@ -247,7 +247,7 @@ Cloud-optimised formats are typically paired with client libraries that hide the
 > *Detailed guidance on chunking strategies is beyond the scope of this report.*   
 >  
   
-The cost of approach (1) is that the data has to be (re)written into the cloud-optimised format, and a given chunking is only optimal for a particular direction of access (for example, geospatial vs. time-series). Where users want to query the same underlying data along very different axes, multiple chunked copies may be required. For high-volume primary archives, this cost is significant and can dominate the storage budget.  
+The cost of this approach is that the data has to be (re)written into the cloud-optimised format, and a given chunking is only optimal for a particular direction of access (for example, geospatial vs. time-series). Where users want to query the same underlying data along very different axes, multiple chunked copies may be required. For high-volume primary archives, this cost is significant and can dominate the storage budget.  
   
 Cloud-optimised formats also tend to assume elastic, non-shared storage that can scale on demand. They typically have no native notion of queueing, throttling or quality-of-service, which can become a problem when serving popular data to a large user base from finite infrastructure.  
   
@@ -257,7 +257,7 @@ Cloud-optimised formats are available for point data, vector data, rasters, n-di
   
 Where the primary data is held in a high-volume archive (for example, a multi-petabyte store of GRIB messages), rewriting it into a cloud-optimised format may be infeasible or undesirable. An alternative is to keep the data in its native layout and provide a service that performs cloud-optimised access on the user's behalf.  
   
-Such a service accepts a high-level request describing the feature the user wants — a region, a polygon, a vertical profile, a spatio-temporal trajectory, a time-series at a point — and returns only the bytes corresponding to that feature, packaged in a streamable response format (for example, OGC CoverageJSON). Internally, the service uses indices over the native archive to identify which fields and which byte-ranges within those fields are required, and reads only those bytes. Compressed primary data can be supported provided the compression scheme allows partial decoding.  
+Such a service accepts a high-level request describing the feature the user wants — a region, a polygon, a vertical profile, a spatio-temporal trajectory, a time-series at a point — and returns only the bytes corresponding to that feature, packaged in a streamable response format (for example, OGC CoverageJSON [^covjson]). Internally, the service uses indices over the native archive to identify which fields and which byte-ranges within those fields are required, and reads only those bytes. Compressed primary data can be supported provided the compression scheme allows partial decoding.  
   
 This approach delivers the cloud-optimised access properties listed above without producing additional copies of the underlying data. It also lends itself naturally to quality-of-service: because every request is mediated by a server, the operator can apply queueing, throttling, authentication and metering. The cost is that the service must understand the structure of the primary archive, and is therefore tightly coupled to it.  
   
@@ -269,7 +269,7 @@ A third approach is to present a cloud-optimised interface — for example, a Za
   
 Two variants are common:  
   
-* *Static virtual stores* — a one-off indexing pass over the legacy files produces a manifest mapping logical chunks to byte-ranges in the original objects. The manifest itself is small and cheap to host. Clients read it like a normal cloud-optimised dataset, while the actual bytes are streamed from the original files. Tools such as Kerchunk and VirtualiZarr implement this pattern over formats including netCDF, HDF5 and GRIB.  
+* *Static virtual stores* — a one-off indexing pass over the legacy files produces a manifest mapping logical chunks to byte-ranges in the original objects. The manifest itself is small and cheap to host. Clients read it like a normal cloud-optimised dataset, while the actual bytes are streamed from the original files. Tools such as Kerchunk [^11] and VirtualiZarr [^10] implement this pattern over formats including netCDF, HDF5 and GRIB.  
 * *Dynamic virtual stores* — the cloud-optimised view is generated on demand from a live archive, with no pre-built manifest. The client requests a chunk; the service queries its primary archive, identifies the corresponding fields and byte-ranges, and returns the chunk as if it had always existed. This allows a single archive to be presented under many different chunkings without storing any of them.  
   
 Virtual stores combine the familiar client-side API of cloud-optimised formats with the no-copy property of feature-extraction services. They inherit the strengths of both — and some of the limitations: the underlying archive still needs an index that supports byte-range extraction, and dynamic virtual stores in particular still depend on a service to mediate requests.  
@@ -292,14 +292,14 @@ The examples below are grouped by the three approaches.
   
 ###### Zarr  
   
-Zarr [^9] is the de facto cloud-native storage format for chunked n-dimensional arrays in the geoscience community. Arrays are persisted as a Zarr store where data is split into chunks stored as individual objects in a directory-like structure, complemented with metadata describing content, shape, chunking and encoding. Zarr is well-supported by client tooling: for example, Xarray reads and writes Zarr directly and supports lazy-loading. Several extensions and complementary specifications (notably GeoZarr) address Zarr's relatively weak built-in metadata model for geospatial data.  
+Zarr [^9] is the de facto cloud-native storage format for chunked n-dimensional arrays in the geoscience community. Arrays are persisted as a Zarr store where data is split into chunks stored as individual objects in a directory-like structure, complemented with metadata describing content, shape, chunking and encoding. Zarr is well-supported by client tooling: for example, Xarray reads and writes Zarr directly and supports lazy-loading. Several extensions and complementary specifications (notably GeoZarr [^geozarr]) address Zarr's relatively weak built-in metadata model for geospatial data.  
   
 ###### Google ARCO-ERA5  
   
 A canonical example of a cloud-optimised format copy of a high-value dataset is the Analysis-Ready, Cloud-Optimized ERA5 dataset, hosted by Google as a public dataset on Google Cloud Storage. The underlying ERA5 reanalysis is distributed in GRIB and netCDF; for ARCO-ERA5, a subset has been re-encoded and re-chunked into Zarr stores that are directly loadable by Xarray over HTTP. The Zarr layout is chosen to favour the intended workloads (in particular ML training and time-series analysis at points). The original ERA5 data continues to be distributed in its native formats; the Zarr copy is an additional, purpose-built ARCO surface over it. [https://console.cloud.google.com/marketplace/product/bigquery-public-data/arco-era5](https://console.cloud.google.com/marketplace/product/bigquery-public-data/arco-era5)  
   
 ###### Environment and Climate Change Canada / Met Service Canada Virtual Optimal Forecast (VOF) over Zarr  
-As part of their next generation forecasting data dissemination, MSC are using cloud-optimised data stores (Zarr hosted on OpenShift private cloud infrastructure) to serve all visualisations for the ECCC public website. Data from nowcast (0-6h), deterministic hi-res (6-48h), and  global (48h+) is stitched together to create a single “virtual” forecast and exposed through OGC API services using pygeoapi. To manage load on the private cloud infrastructure, the OGC API services and Zarr stores are not publicly accessible; the data may only be accessed via the public website.  
+As part of their next generation forecasting data dissemination, MSC are using cloud-optimised data stores (Zarr hosted on OpenShift private cloud infrastructure) to serve all visualisations for the ECCC public website. Data from nowcast (0-6h), deterministic hi-res (6-48h), and  global (48h+) are stitched together to create a single “virtual” forecast and exposed through OGC API services using pygeoapi. To manage load on the private cloud infrastructure, the OGC API services and Zarr stores are not publicly accessible; the data may only be accessed via the public website.  
   
 ##### Feature extraction over native data  
   
@@ -346,9 +346,9 @@ Components include ([diagram](https://github.com/wmo-im/metdx-demo/blob/main/doc
 3. Data discovery catalogue (Global Discovery Catalogue test instance; to host WCMP2 records for the test datasets used in the testbed).   
 4. Data cube indexer (create virtual Zarr stores over legacy data files).  
 5. Raw data cube index server (Garage object store — an S3 clone; for serving native Zarrs and Zarr indexes).  
-6. Data subsetting server (OGC API EDR).  
-7. Data visualisation server (OGC API Maps).  
-8. Data processing and charting server (OGC API Processes).  
+6. Data subsetting server (OGC API-EDR).  
+7. Data visualisation server (OGC API-Maps).  
+8. Data processing and charting server (OGC API-Processes).  
   
 Components are deployable as Docker containers.  
   
@@ -356,8 +356,8 @@ OGC API implementations:
 * pygeoapi — with native support for Xarray resources.  
 * Zarr plugin for pygeoapi — exposing native Zarr objects published by ECCC/MSC; model run instance identification based on hard-coded pattern matching on the object name.   
 * earthkit plugin for pygeoapi — exposing polytope library with local Zarr store _AND_ polytope service with ECMWF FDB.  
-* earthkit plots — OGC API Maps exposing Destination Earth digital twin data using polytope service and FDB.  
-* earthkit workflows — OGC API Processes (simple chart/timeseries renderer).  
+* earthkit plots — OGC API-Maps exposing Destination Earth digital twin data using polytope service and FDB.  
+* earthkit workflows — OGC API-Processes (simple chart/timeseries renderer).  
 * Serverless EDR implementation — AWS lambda exposing Met Office / ECMWF indexed CF-NetCDF model data.  
 * Serverless Maps implementation — AWS lambda (with matplotlib) exposing Met Office / ECMWF indexed CF-NetCDF model data.      
   
@@ -478,7 +478,7 @@ https://example.com/collections/ca-eccc-msc-nwp-gdps/map?f=png&width=500&height=
 
 ```
   
-OGC API Environmental Data Retrieval (EDR) profile:   
+OGC API-Environmental Data Retrieval (EDR) profile:   
 * [GitHub](https://github.com/EUMETNET/metocean-edr-profile), [draft spec](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html) ==pending merge of [PR#75](https://github.com/EUMETNET/metocean-edr-profile/pull/75)==  
 * Collection instance: single model run, all parameters with consistent domain (note: models output data on several vertical reference systems — pressure levels, surface, whole-earth, etc.; consequently a model run may map to several Collections).  
 * Parameter names should be consistent, concise and human readable. Propose a standard list of names for common parameters (the 16 parameters defined in Manual on WIPPS for global deterministic weather prediction data) based on ECMWF eccodes short-names.  
@@ -492,7 +492,7 @@ https://example.com/collections/ca-eccc-msc-nwp-gdps/position?f=json&coords=POIN
 
 ```
   
-OGC API Processes Part 1 profile:  
+OGC API-Processes Part 1 profile:  
 * None.   
 * Propose to define which operations a modelling centre should provide to process their data. TBD.  
   
@@ -568,15 +568,17 @@ Recognising the continued increase in data volumes from space-based observation 
 [^3]: FAIR Guiding Principles for scientific data management and stewardship [https://www.go-fair.org/fair-principles/](https://www.go-fair.org/fair-principles/)   
 [^4]: Open Geospatial Consortium, a member-lead organisation that defines open geospatial standards [https://www.ogc.org](https://www.ogc.org)   
 [^5]: Open API Specification [https://swagger.io/specification/](https://swagger.io/specification/)   
-[^6]: OGC API EDR — Part 3: Service Profile Support (Working Group draft) [https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/blob/master/extensions/service_profiles/standard/25-014.adoc](https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/blob/master/extensions/service_profiles/standard/25-014.adoc)  
-[^7]: EUMETNET MetOcean OGC API EDR Profile (draft) [https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html)  
+[^6]: OGC API-EDR — Part 3: Service Profile Support (Working Group draft) [https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/blob/master/extensions/service_profiles/standard/25-014.adoc](https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/blob/master/extensions/service_profiles/standard/25-014.adoc)  
+[^7]: EUMETNET MetOcean OGC API-EDR Profile (draft) [https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html)  
 [^8]: Cloud-Optimized Geospatial Formats Overview [https://guide.cloudnativegeo.org/overview.html](https://guide.cloudnativegeo.org/overview.html)  
 [^9]: Zarr specification [https://zarr.dev/](https://zarr.dev/)   
 [^10]: VirtualiZarr [https://github.com/zarr-developers/VirtualiZarr](https://github.com/zarr-developers/VirtualiZarr)   
 [^11]: Kerchunk [https://fsspec.github.io/kerchunk/](https://fsspec.github.io/kerchunk/)   
 [^12]: ECMWF Polytope — An open-source library for extracting complex data from datacubes [https://github.com/ecmwf/polytope](https://github.com/ecmwf/polytope)   
 [^13]: ECMWF earthkit — An open-source project providing powerful tools for speeding up weather and climate science workflows [https://github.com/ecmwf/earthkit](https://github.com/ecmwf/earthkit)   
-[^14]: zfdb — A python-zarr v3 store implementation that provides a virtual Zarr store from FDB [https://github.com/ecmwf/fdb#z3fdb](https://github.com/ecmwf/fdb#z3fdb)  
+[^14]: zfdb — A python-zarr v3 store implementation that provides a virtual Zarr store from FDB [https://github.com/ecmwf/fdb#z3fdb](https://github.com/ecmwf/fdb#z3fdb)
+[^covjson]: OGC CoverageJSON Community Standard [https://docs.ogc.org/cs/21-069r2/21-069r2.html](https://docs.ogc.org/cs/21-069r2/21-069r2.html)
+[^geozarr]: GeoZarr — Geospatial Conventions for Zarr (targetting OGC standardisation) [https://geozarr.org/](https://geozarr.org/)
   
   
 +++  
