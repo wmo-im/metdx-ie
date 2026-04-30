@@ -1,7 +1,7 @@
 # SG-FIT least disruptive  
   
 [not attempting to provide a Guide or technical documentation]  
-[we’re still debating whether to use the term “==hypercube==”]  
+[we’re still debating whether to use the term “==hypercube==” ... perhaps: **ARCADE** (Analysis Ready Cubed Array of Data for Exploration) ... but there's no agreement yet]  
   
 ## PREAMBLE  
 
