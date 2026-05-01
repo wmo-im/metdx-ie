@@ -548,15 +548,21 @@ Web-based UI:
 The Least Disruptive work-stream of the Study Group has identified several elements that could be incorporated into WMO Technical Regulations. During the next intercessional period (2027-2028), the Standing Committee on Information Management and Technology (SC-IMT) is expected to pursue the following objectives under the work item “WIS 2.0 Evolution in Support of the Future Data Infrastructure and AI applications”:  
   
 1. Develop a standard framework for the use of Web-based data APIs in WIS2.  
-2. Collaborate with the OGC MetOcean Domain Working Group to develop OGC API profiles and reference implementations for the use of OGC API-Maps ([GitHub](https://github.com/opengeospatial/metocean-ogcapi-maps-profile), [draft spec](https://docs.ogc.org/DRAFTS/26-002.html)), EDR ([GitHub](https://github.com/EUMETNET/metocean-edr-profile), [draft spec](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html) ==pending merge of [PR#75](https://github.com/EUMETNET/metocean-edr-profile/pull/75)==), and Processes (Part 1) in the WMO context.  
-3. Develop a standard, technology-agnostic mechanism for describing n-dimensional array datasets (i.e., ==hypercubes==) plus reference implementations.  
+2. Collaborate with the OGC MetOcean Domain Working Group to develop OGC API profiles and reference implementations for the use of OGC API-Maps ([GitHub](https://github.com/opengeospatial/metocean-ogcapi-maps-profile), [draft spec](https://docs.ogc.org/DRAFTS/26-002.html)), EDR ([GitHub](https://github.com/EUMETNET/metocean-edr-profile), [draft spec](https://eumetnet.github.io/metocean-edr-profile/standard/metocean-edr-profile-DRAFT.html) ==pending merge of [PR#75](https://github.com/EUMETNET/metocean-edr-profile/pull/75)==), and Processes (Part 1) in the WMO context.
+3. Develop a standard interface that describes cloud-optimised access to n-dimensional array datasets (i.e., ==hypercubes==) plus reference implementations.
 4. Develop guidance for provision of “==Analysis-Ready==, Cloud-Optimized” (ARCO) weather and climate data that is ready for use with AI applications.  
 5. Develop guidance for the use of STAC to describe weather and climate datasets.   
   
 The “WMO context” is broad, covering 7 Earth system domains: weather, climate, water (hydrology), atmospheric composition, oceans, cryosphere, and space weather. The Study Group identified the most impactful data-sharing use case to be the distribution of weather prediction model output. This type of data is produced by many centres and is provides an essential input into every Member’s public weather service and early warning system. Yet still, this data remains difficult for many least developed countries and small island developing states to leverage. Consequently, the work of SC-IMT will initially focus on driving effective sharing of weather prediction data. In parallel, SC-IMT will develop a roadmap for the application of these approaches into other application areas.  
   
-Recognising the continued increase in data volumes from space-based observation platforms, and the need to ensure equitable access to such data products for all Members, SC-IMT welcomes the opportunity to collaborate with satellite operators to progress solutions relevant to their needs.     
-  
+Recognising the continued increase in data volumes from space-based observation platforms, and the need to ensure equitable access to such data products for all Members.
+
+WIPPS designated centres should familiarise themselves with Web-based APIs and cloud-optimised patterns for accessing their data in readiness for the new Technical Regulation. 
+
+SC-IMT welcomes the opportunity to collaborate with WIPPS-designated centres and satellite operators to progress solutions relevant to their needs and validate proposals for new Technical Regulation through pilot activities.
+
+Web-based APIs and cloud-optimised access patterns will provide opportunities for Members to access Earth system data in new ways. SC-IMT is encouraged to consider extending the SG-FIT testbed into pilot activities with which Members can engage to ensure that their data-access needs are met. 
+
 +++  
   
 [^1]: Manual on the WMO Information System (WMO-No. 1060), Volume II - WIS 2.0, PART IV WIS TECHNICAL SPECIFICATIONS [https://library.wmo.int/idurl/4/68731](https://library.wmo.int/idurl/4/68731)  
