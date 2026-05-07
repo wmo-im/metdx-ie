@@ -162,7 +162,8 @@ The key characteristics of a cloud-optimised format are:
 * Resources are described independently of their underlying storage structures. A single parameter spanning an entire model run can be presented as one logical resource, rather than thousands of small files.  
 * The number of reads needed to locate the required bytes is minimised — metadata is packaged together so that clients do not need to open many objects to find what they want.  
 * Data is stored as small addressable chunks (files, tiles, or both), so reads can be parallelised into many small requests.  
-* The chunking is hidden from the user; the format library converts logical reads on the dataset into the corresponding chunk reads.  
+* The chunking is hidden from the user; the format library converts logical reads on the dataset into the corresponding chunk reads.
+* Chunks may be grouped together into shards to improve read/write performance - especially where the chunk size is smaller than the block size of the storage system. 
 * Lazy-loading is supported — the metadata is used to build an empty hypercube in memory, and chunks are fetched only when the application reads from them.  
 * HTTP range-requests are supported, so clients can fetch sub-chunk byte ranges where useful.  
   
